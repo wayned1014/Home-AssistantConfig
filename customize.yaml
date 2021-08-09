@@ -1,0 +1,4 @@
+fan.14287_fan_control_switch_level: {}
+zone.home:
+  radius: 600
+media_player.sony_bravia_tv: {}

@@ -1,0 +1,109 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    base_url: http://192.168.0.238:8123
+
+opnsense:
+#  url: https://192.168.0.1/api
+  url: https://opnsense.localdomain/api
+  api_secret: !secret opnsense_api_secret
+  api_key: !secret opnsense_api_key
+  verify_ssl: false
+  
+# https Setup
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+  
+# Example configuration.yaml entry
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+  # "Project ID" in the Device Access Console
+  project_id: !secret nest_project_id
+  # Provide the full path exactly as shown under "Subscription name" in Google Cloud Console
+  subscriber_id: !secret nest_subscriber_id
+  
+homeassistant:
+  packages: !include_dir_named packages
+  customize: !include customize.yaml
+
+sensor: !include_dir_merge_list conf/sensor/
+
+#  - platform: weatheralerts
+#    state: NJ
+#    zone: 12
+#    county: 23
+  
+# Example configuration.yaml entry
+binary_sensor:
+  - platform: template
+    sensors:
+      shinobi_ups_power_source:
+        value_template: "{{ is_state('sensor.shinobi_ups_status', '1') }}"
+        icon_template: >-
+          {% if is_state('sensor.shinobi_ups_status', '1') %}
+            mdi:battery
+          {% else %}
+            mdi:power-plug
+          {% endif %}
+
+camera:
+  - platform: generic
+    name: House_Front
+    still_image_url: !secret camera_still_image_url
+    stream_source: !secret camera_stream_source
+
+media_player:
+  - platform: braviatv_psk
+    host: 192.168.0.240
+    psk: !secret media_player_psk
+    android: True
+    sourcefilter:
+      - ' HD'
+      - HDMI
+      - VUDU
+    time_format: 12H
+    user_labels: True
+    name: MyBraviaTV
+
+logbook:
+  exclude:
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.date_time
+      - sensor.time_date
+      - sensor.date_time_iso
+      - sensor.internet_time
+      - sensor.time_utc
+
+recorder:
+  db_url: !secret recorder_db_url
+
+  commit_interval: 1
+  purge_keep_days: 64
+  exclude:
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.date_time
+      - sensor.time_date
+      - sensor.date_time_iso
+      - sensor.internet_time
+      - sensor.time_utc
+
+logger:
+  default: info

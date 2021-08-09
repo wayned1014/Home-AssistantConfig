@@ -1,0 +1,53 @@
+- platform: history_stats
+  name: heat_on_time_yesterday
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: time
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24
+
+- platform: history_stats
+  name: heat_on_duty_cycle__yesterday
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: ratio
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24
+
+- platform: history_stats
+  name: heat_on_count_yesterday
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: count
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24
+
+- platform: history_stats
+  name: cool_on_time_yesterday
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: time
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24
+
+- platform: history_stats
+  name: cool_on_duty_cycle_yesterday
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: ratio
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24
+
+- platform: history_stats
+  name: cool_on_count_yesterday
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: count
+  end: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  duration:
+    hours: 24

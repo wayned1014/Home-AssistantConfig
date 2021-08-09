@@ -1,0 +1,13 @@
+- id: '1619552687242'
+  alias: Clock Brightness
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_number.clock_brightness
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: esp32/output/brightness
+      payload: '{{ states.input_number.clock_brightness.state }}'
+  mode: single

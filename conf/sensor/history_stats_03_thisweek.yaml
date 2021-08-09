@@ -1,0 +1,53 @@
+- platform: history_stats
+  name: heat_on_time_thisweek
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: time
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
+
+- platform: history_stats
+  name: heat_on_duty_cycle_thisweek
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: ratio
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
+
+- platform: history_stats
+  name: heat_on_count_thisweek
+  entity_id: sensor.hvac_status
+  state: ['heating_on', 'heat_cool_heating_on']
+  type: count
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
+
+- platform: history_stats
+  name: cool_on_time_thisweek
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: time
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
+
+- platform: history_stats
+  name: cool_on_duty_cycle_thisweek
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: ratio
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
+
+- platform: history_stats
+  name: cool_on_count_thisweek
+  entity_id: sensor.hvac_status
+  state: ['cooling_on', 'heat_cool_cooling_on']
+  type: count
+  start: "{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - (now().replace(hour=0,minute=0,second=0) + timedelta(days=1)).weekday() * 86400 }}"
+  duration:
+    hours: 168
