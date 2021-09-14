@@ -1,0 +1,4 @@
+- sensor:
+    - name: 'Outside Temp'
+      unit_of_measurement: '°F'
+      state: '{{ states["weather.kewr_daynight"].attributes.temperature }}'

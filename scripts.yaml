@@ -227,3 +227,11 @@ homepanel_wake:
       topic: wallpanel/mywallpanel/command
       payload: '{"wake": true}'
   mode: single
+homepanel_pandora:
+  alias: HomePanel Pandora
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: wallpanel/mywallpanel/command
+      payload: '{"url": "http://intent:#Intent;launchFlags=0x10000000;component=com.pandora.android/.Main;end"}'
+  mode: single

@@ -49,16 +49,6 @@
           heat_cool_cooling_on
         {% endif %}
 
-    temp_average:
-      friendly_name: 'Temp Average'
-      unit_of_measurement: '°F'
-      value_template: '{{ states.sensor.living_room_temperature.state | round(1) }}'
-      
-    outside_temp:
-      friendly_name: 'Outside Temperature'
-      unit_of_measurement: '°F'
-      value_template: '{{ states["weather.kewr_daynight"].attributes.temperature }}'
-      
     uptime_ha:
       friendly_name: Uptime HA
       icon_template: mdi:server

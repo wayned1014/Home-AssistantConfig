@@ -41,6 +41,7 @@ homeassistant:
   customize: !include customize.yaml
 
 sensor: !include_dir_merge_list conf/sensor/
+template: !include_dir_merge_list conf/template/
 
 #  - platform: weatheralerts
 #    state: NJ
