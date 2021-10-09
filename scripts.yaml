@@ -118,23 +118,6 @@ node_red_test:
   alias: Node-Red Test
   sequence:
   mode: single
-home_shutdown:
-  alias: Home-Shutdown
-  sequence:
-  - service: media_player.turn_off
-    target:
-      device_id: 9d6969b43e14dd7103f40c563ed9783d
-  - service: fan.turn_off
-    target:
-      device_id:
-      - 6f091281af94473f5b449698e046b23b
-      - 6ee3872cf9317fe13bf397782a44f7cd
-  - service: light.turn_off
-    target:
-      device_id:
-      - 8d99363f889d5d18bda0d0c285402f0d
-      - f39d82088737706acb0961912b26b0e3
-  mode: single
 climate_decrease_temperature:
   alias: Climate-Decrease Temperature
   sequence:
@@ -235,3 +218,11 @@ homepanel_pandora:
       topic: wallpanel/mywallpanel/command
       payload: '{"url": "http://intent:#Intent;launchFlags=0x10000000;component=com.pandora.android/.Main;end"}'
   mode: single
+house_shutdown:
+  sequence:
+  - service: input_boolean.turn_on
+    target:
+      entity_id:
+      - input_boolean.house_shutdown
+  mode: single
+  alias: House-Shutdown
