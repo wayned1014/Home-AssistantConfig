@@ -1,0 +1,16 @@
+- resource: !secret ipinfo_url
+  scan_interval: 3600
+  sensor:
+    - name: "ISP Data"
+      value_template: "{{ now() }}"
+      json_attributes:
+        - "ip"
+        - "hostname"
+        - "city"
+        - "region"
+        - "country"
+        - "loc"
+        - "org"
+        - "postal"
+        - "timezone"
+        - "readme"
