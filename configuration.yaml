@@ -8,7 +8,6 @@ tts:
     base_url: http://192.168.0.238:8123
 
 opnsense:
-#  url: https://192.168.0.1/api
   url: https://opnsense.localdomain/api
   api_secret: !secret opnsense_api_secret
   api_key: !secret opnsense_api_key
@@ -49,19 +48,6 @@ rest: !include_dir_merge_list conf/rest/
 #    zone: 12
 #    county: 23
   
-# Example configuration.yaml entry
-binary_sensor:
-  - platform: template
-    sensors:
-      shinobi_ups_power_source:
-        value_template: "{{ is_state('sensor.shinobi_ups_status', '1') }}"
-        icon_template: >-
-          {% if is_state('sensor.shinobi_ups_status', '1') %}
-            mdi:battery
-          {% else %}
-            mdi:power-plug
-          {% endif %}
-
 camera:
   - platform: generic
     name: House_Front
