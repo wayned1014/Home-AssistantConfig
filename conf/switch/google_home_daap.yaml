@@ -1,0 +1,12 @@
+- platform: template
+  switches:
+    google_home_daap:
+      value_template: "{{ is_state('input_boolean.google_home_daap', 'on') }}"
+      turn_on:
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.google_home_daap
+        - service: script.google_livingroom_daap_on
+      turn_off:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.google_home_daap
+        - service: script.google_livingroom_daap_off

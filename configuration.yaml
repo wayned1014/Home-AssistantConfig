@@ -42,6 +42,7 @@ homeassistant:
 sensor: !include_dir_merge_list conf/sensor/
 template: !include_dir_merge_list conf/template/
 rest: !include_dir_merge_list conf/rest/
+switch: !include_dir_merge_list conf/switch/
 
 #  - platform: weatheralerts
 #    state: NJ
