@@ -18,4 +18,6 @@ Software:
   - MariaDB(for HA recorder)
   - Frigate(no Google Coral, only 1 camera right now)
   - Unitrends Backup(for backups, duh, of course!)
+  - OwnTone(Music Streaming)
+  - UniFi Network Application
 

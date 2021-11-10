@@ -186,24 +186,47 @@ house_shutdown:
       - input_boolean.house_shutdown
   mode: single
   alias: House-Shutdown
-'1635185822285':
-  sequence:
-  - service: media_player.toggle
-    target:
-      entity_id: media_player.forked_daapd_output_living_room_2
-  mode: single
-  alias: Google-Livingroom-DAAP-Toggle
-google_livingroom_daap_on:
-  sequence:
-  - service: media_player.turn_on
-    target:
-      entity_id: media_player.forked_daapd_output_living_room_2
-  mode: single
-  alias: Google Livingroom DAAP On
-google_livingroom_daap_off:
+daap_sonos_livingroom_off:
+  alias: DAAP-Sonos Livingroom-Off
   sequence:
   - service: media_player.turn_off
     target:
-      entity_id: media_player.forked_daapd_output_living_room_2
+      entity_id:
+      - media_player.forked_daapd_output_living_room
   mode: single
-  alias: Google Livingroom DAAP Off
+daap_sonos_livingroom_on:
+  alias: DAAP-Sonos Livingroom-On
+  sequence:
+  - service: media_player.turn_on
+    target:
+      entity_id:
+      - media_player.forked_daapd_output_living_room
+  - service: media_player.volume_set
+    target:
+      entity_id:
+      - media_player.forked_daapd_output_living_room
+    data:
+      volume_level: 0.1
+  mode: single
+daap_google_livingroom_on:
+  sequence:
+  - service: media_player.turn_on
+    target:
+      entity_id:
+      - media_player.forked_daapd_output_google_home
+  - service: media_player.volume_set
+    target:
+      entity_id:
+      - media_player.forked_daapd_output_google_home
+    data:
+      volume_level: 0.2
+  mode: single
+  alias: DAAP-Google Livingroom-On
+daap_google_livingroom_off:
+  alias: DAAP-Google Livingroom-Off
+  sequence:
+  - service: media_player.turn_off
+    target:
+      entity_id:
+      - media_player.forked_daapd_output_google_home
+  mode: single

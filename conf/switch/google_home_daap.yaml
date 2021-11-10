@@ -5,8 +5,8 @@
       turn_on:
         - service: input_boolean.turn_on
           entity_id: input_boolean.google_home_daap
-        - service: script.google_livingroom_daap_on
+        - service: script.daap_google_livingroom_on
       turn_off:
         - service: input_boolean.turn_off
           entity_id: input_boolean.google_home_daap
-        - service: script.google_livingroom_daap_off
+        - service: script.daap_google_livingroom_off

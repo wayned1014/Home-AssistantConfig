@@ -55,19 +55,6 @@ camera:
     still_image_url: !secret camera_still_image_url
     stream_source: !secret camera_stream_source
 
-media_player:
-  - platform: braviatv_psk
-    host: 192.168.0.240
-    psk: !secret media_player_psk
-    android: True
-    sourcefilter:
-      - ' HD'
-      - HDMI
-      - VUDU
-    time_format: 12H
-    user_labels: True
-    name: MyBraviaTV
-
 logbook:
   exclude:
     entities:
