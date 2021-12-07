@@ -11,3 +11,13 @@
       topic: esp32/output/brightness
       payload: '{{ states.input_number.clock_brightness.state }}'
   mode: single
+- id: '1638132276419'
+  alias: Flight entry notification
+  trigger:
+  - platform: event
+    event_type: opensky_entry
+  action:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Flight entry of {{ trigger.event.data.callsign }}, Altitude {{ trigger.event.data.altitude
+        }} meters.

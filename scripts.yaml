@@ -189,10 +189,11 @@ house_shutdown:
 daap_sonos_livingroom_off:
   alias: DAAP-Sonos Livingroom-Off
   sequence:
-  - service: media_player.turn_off
+  - service: media_player.select_source
     target:
-      entity_id:
-      - media_player.forked_daapd_output_living_room
+      entity_id: media_player.sonos_arc_2
+    data:
+      source: TV
   mode: single
 daap_sonos_livingroom_on:
   alias: DAAP-Sonos Livingroom-On
