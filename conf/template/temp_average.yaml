@@ -1,5 +1,5 @@
 - sensor:
     - name: 'Temp Average'
       unit_of_measurement: '°F'
-      state: '{{ states.sensor.living_room_temperature.state | round(1) }}'
+      state: '{{ states.sensor.thermostat_temperature.state | round(1) }}'
 

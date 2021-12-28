@@ -46,6 +46,14 @@ template: !include_dir_merge_list conf/template/
 rest: !include_dir_merge_list conf/rest/
 switch: !include_dir_merge_list conf/switch/
 
+shell_command:
+  owntone_sonos_on: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/79880900644729" --data "{\"selected\":true, \"volume\": 10}"'
+  owntone_tv_on: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/4021710331606" --data "{\"selected\":true, \"volume\": 10}"'
+  owntone_sonos_off: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/79880900644729" --data "{\"selected\":false, \"volume\": 10}"'
+  owntone_tv_off: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/4021710331606" --data "{\"selected\":false, \"volume\": 10}"'
+  owntone_google_home_livingroom_on: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/2544647392" --data "{\"selected\":true, \"volume\": 20}"'
+  owntone_google_home_livingroom_off: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/2544647392" --data "{\"selected\":false, \"volume\": 48}"'
+
 #  - platform: weatheralerts
 #    state: NJ
 #    zone: 12

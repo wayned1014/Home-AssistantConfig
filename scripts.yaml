@@ -189,25 +189,14 @@ house_shutdown:
 daap_sonos_livingroom_off:
   alias: DAAP-Sonos Livingroom-Off
   sequence:
-  - service: media_player.select_source
-    target:
-      entity_id: media_player.sonos_arc_2
-    data:
-      source: TV
+  - service: shell_command.owntone_sonos_off
+  - service: shell_command.owntone_tv_off
   mode: single
 daap_sonos_livingroom_on:
   alias: DAAP-Sonos Livingroom-On
   sequence:
-  - service: media_player.turn_on
-    target:
-      entity_id:
-      - media_player.forked_daapd_output_living_room
-  - service: media_player.volume_set
-    target:
-      entity_id:
-      - media_player.forked_daapd_output_living_room
-    data:
-      volume_level: 0.1
+  - service: shell_command.owntone_tv_on
+  - service: shell_command.owntone_sonos_on
   mode: single
 daap_google_livingroom_on:
   sequence:
