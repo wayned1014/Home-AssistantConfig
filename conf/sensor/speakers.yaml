@@ -1,0 +1,15 @@
+- platform: rest
+  name: Livingroom GC Volume
+  resource: http://192.168.0.249:3689/api/outputs/2544647392
+  method: GET
+  json_attributes:
+    - id
+    - name
+    - type
+    - selected
+    - has_password
+    - requires_auth
+    - needs_auth_key
+    - volume
+  value_template: "{{ value_json.volume }}"
+  scan_interval: 5

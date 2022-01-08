@@ -1,0 +1,4 @@
+- sensor:
+    - name: 'Cool Kwh LastWeek'
+      unit_of_measurement: 'kWh'
+      state: "{{ '%.2f' | format(states.sensor.cool_on_time_lastweek.state | float * 3.228) }}"

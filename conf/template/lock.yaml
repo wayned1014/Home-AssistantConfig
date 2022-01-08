@@ -1,0 +1,3 @@
+- sensor:
+    - name: 'Lock Mode'
+      state: '{{ states.lock.touchscreen_deadbolt_current_lock_mode.state }}'

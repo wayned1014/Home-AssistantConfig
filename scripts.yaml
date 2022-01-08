@@ -42,9 +42,10 @@ google_home_say:
 test_google_home_say:
   alias: Test google home say
   sequence:
-  - service: script.google_home_say
+  - service: tts.cloud_say
     data:
-      message: This is also a test of the unit
+      entity_id: media_player.gc_living_room_speaker
+      message: This is a test
   mode: single
 livingroom_fan_off:
   alias: Livingroom Fan Off
@@ -219,4 +220,160 @@ daap_google_livingroom_off:
     target:
       entity_id:
       - media_player.forked_daapd_output_google_home
+  mode: single
+set_jb_stream:
+  alias: Set Jukebox Stream variables
+  mode: single
+  sequence:
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_stream
+      value: '{{jb_stream}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_stream_name
+      value: '{{jb_stream_name}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_stream_logo
+      value: '{{jb_stream_logo}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.media_content_type
+      value: '{{media_content_type}}'
+set_jb_speaker:
+  alias: Set Juke Box Speaker variables
+  mode: queued
+  sequence:
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_speaker_entity
+      value: '{{jb_speaker_entity}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_speaker_name
+      value: '{{jb_speaker_name}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_speaker_image
+      value: '{{jb_speaker_image}}'
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.jb_speaker_switch
+      value: '{{jb_speaker_switch}}'
+play_media_stream:
+  alias: Play media stream on Selected Media Player
+  mode: restart
+  variables:
+    stream_to_play: '{{ states(''input_text.jb_stream'') }}'
+    stream_type_http: '{{ stream_to_play|truncate(4,false,'''') == ''http''}}'
+    sonos_service_to_play: '{% if stream_type_http -%} media_player.play_media {%-
+      else -%} plex.play_on_sonos {%- endif -%}'
+    sonos_stream_to_play: '{% if stream_type_http -%} {{states(''input_text.jb_sonos_http_prefix'')
+      + states(''input_text.jb_stream'')}} {%- else -%} {{states(''input_text.jb_stream'')}}
+      {%- endif -%}'
+    cast_stream_to_play: '{% if stream_type_http -%} {{states(''input_text.jb_stream'')}}
+      {%- else -%} {{states(''input_text.jb_cast_plex_prefix'') + states(''input_text.jb_stream'')}}
+      {%- endif -%}'
+  sequence:
+  - choose:
+    - conditions: '{{states(''input_text.jb_speaker_switch'')!=''none''}}'
+      sequence:
+      - service: input_text.set_value
+        data:
+          entity_id: input_text.jb_status
+          value: Waiting for Switch
+      - service: script.turn_on_speaker
+        data_template:
+          switch: '{{ states(''input_text.jb_speaker_switch'') }}'
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.jb_status
+          value: '{{''Waiting for Speaker '' + states(''input_text.jb_speaker_name'')}}'
+      - wait_template: '{{ not is_state(states(''input_text.jb_speaker_entity''),''unavailable'')
+          }}'
+        timeout: 00:05:00
+      - service: input_text.set_value
+        data:
+          entity_id: input_text.jb_status
+          value: done
+  - choose:
+    - conditions: '{{state_attr(states(''input_text.jb_speaker_entity''),''sonos_group'')==
+        None}}'
+      sequence:
+      - service: script.play_jb_stream
+        data_template:
+          speaker: '{{ states(''input_text.jb_speaker_entity'') }}'
+          stream: '{{ cast_stream_to_play }}'
+          content: '{{ states(''input_text.media_content_type'') }}'
+          service: media_player.play_media
+    default:
+    - service: script.play_jb_stream
+      data_template:
+        speaker: '{{ states(''input_text.jb_speaker_entity'') }}'
+        stream: '{{ sonos_stream_to_play }}'
+        content: '{{ states(''input_text.media_content_type'') }}'
+        service: '{{ sonos_service_to_play }}'
+play_jb_stream:
+  alias: Play Selected music stream
+  mode: queued
+  sequence:
+  - service: '{{service}}'
+    data_template:
+      entity_id: '{{speaker}}'
+      media_content_id: '{{stream}}'
+      media_content_type: '{{content}}'
+turn_on_speaker:
+  alias: Turn on Speaker
+  mode: queued
+  sequence:
+  - condition: template
+    value_template: '{{ not is_state(''input_text.jb_speaker_switch'', ''none'') }}'
+  - service: switch.turn_on
+    data_template:
+      entity_id: '{{states(''input_text.jb_speaker_switch'')}}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ is_state(''input_text.jb_speaker_entity'', ''media_player.living_room'')}}'
+      sequence:
+      - service: remote.turn_on
+        entity_id: remote.harmony_hub
+        data:
+          activity: Listen To Music on Sonos
+    - conditions:
+      - condition: template
+        value_template: '{{ is_state(''input_text.jb_speaker_entity'', ''media_player.living_room_system'')}}'
+      sequence:
+      - service: remote.turn_on
+        entity_id: remote.harmony_hub
+        data:
+          activity: Listen To Music on Google
+play_media_stream_1:
+  mode: single
+  alias: Play media stream on Selected Media Player 1
+  sequence:
+  - service: script.play_jb_stream_1
+    data_template:
+      source: '{{ states(''input_text.jb_stream'') }}'
+      service: media_player.select_source
+play_jb_stream_1:
+  sequence:
+  - service: '{{service}}'
+    data_template:
+      source: '{{source}}'
+    target:
+      entity_id: media_player.forked_daapd_server
+  - service: media_player.media_play
+    target:
+      entity_id: media_player.forked_daapd_server
+  alias: Play Selected music stream 1
+  mode: single
+test_panel_deleteme:
+  alias: Test Panel-DELETEME
+  sequence:
+  - type: toggle
+    device_id: d6126d1e8c27e88275cf89906b10d4c0
+    entity_id: switch.tasmota
+    domain: switch
   mode: single

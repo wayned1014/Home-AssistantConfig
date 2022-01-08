@@ -1,0 +1,20 @@
+- sensor:
+    - name: 'HVAC Status'
+      state: >
+        {% if is_state("climate.thermostat", "off") %}
+          off
+        {% elif is_state("climate.thermostat", "heat") and states['climate.thermostat'].attributes.hvac_action == "off" %}
+          heating_off
+        {% elif is_state("climate.thermostat", "heat") and states['climate.thermostat'].attributes.hvac_action == "heating" %}
+          heating_on
+        {% elif is_state("climate.thermostat", "cool") and states['climate.thermostat'].attributes.hvac_action == "off" %}
+          cooling_off
+        {% elif is_state("climate.thermostat", "cool") and states['climate.thermostat'].attributes.hvac_action == "cooling" %}
+          cooling_on
+        {% elif is_state("climate.thermostat", "heat_cool") and states['climate.thermostat'].attributes.hvac_action == "off" %}
+          heat_cool_off
+        {% elif is_state("climate.thermostat", "heat_cool") and states['climate.thermostat'].attributes.hvac_action == "heating" %}
+          heat_cool_heating_on
+        {% elif is_state("climate.thermostat", "heat_cool") and states['climate.thermostat'].attributes.hvac_action == "cooling" %}
+          heat_cool_cooling_on
+        {% endif %}

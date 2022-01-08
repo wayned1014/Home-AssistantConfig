@@ -1,0 +1,8 @@
+- sensor:
+    - name: 'Sonos Playing'
+      state: >
+        {%- if is_state("media_player.sonos_arc_2", "playing") %}
+          <h3>{{states.media_player.sonos_arc_2.attributes.media_title}}</h3><p>{{states.media_player.sonos_arc_2.attributes.media_artist}}<br />{{states.media_player.sonos_arc_2.attributes.media_album_name}}</p>
+        {% else %}
+          Not playing
+        {%- endif %}

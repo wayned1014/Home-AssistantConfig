@@ -21,3 +21,26 @@
     data:
       message: Flight entry of {{ trigger.event.data.callsign }}, Altitude {{ trigger.event.data.altitude
         }} meters.
+- id: '1641250283772'
+  alias: Volume Slider Change Bedroom
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_number.livingroom_gc_volume_slider
+  condition: []
+  action:
+  - service: rest_command.set_livingroom_gc_volume
+  mode: single
+- id: '1641250553089'
+  alias: Volume Change Livingroom GC
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.livingroom_gc_volume
+  condition: []
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.livingroom_gc_volume_slider
+      value: '{{ states.sensor.bedroom_volume_slider.state }}'
+  mode: single

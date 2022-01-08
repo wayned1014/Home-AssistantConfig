@@ -1,0 +1,12 @@
+- sensor:
+    - name: 'Bedroom Fan Mode'
+      state: >
+        {% if states['fan.bedroom_fan_current_value'].attributes.speed == "off" %}
+          Off
+        {% elif states['fan.bedroom_fan_current_value'].attributes.speed == "low" %}
+          Low
+        {% elif states['fan.bedroom_fan_current_value'].attributes.speed == "medium" %}
+          Medium
+        {% elif states['fan.bedroom_fan_current_value'].attributes.speed == "high" %}
+          High
+        {% endif %}

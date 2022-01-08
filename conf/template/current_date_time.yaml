@@ -1,0 +1,5 @@
+- sensor:
+    - name: 'Current Date Time'
+      state: >
+        {% set x = states('sensor.time') %}
+        {{ now().strftime("%a, %b %-d, %Y - ") + now().strftime("%I:%M %p") }}

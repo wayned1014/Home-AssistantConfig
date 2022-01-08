@@ -1,0 +1,12 @@
+- sensor:
+    - name: 'Days In Month'
+      state: >
+        {% if now().month in [1,2,4,6,8,9,11] %}
+          31
+        {% elif now().month in [5,7,10,12] %}
+          30
+        {% elif now().month == 3 and ((now().year-2000) % 4 > 0) %}
+          28
+        {% elif now().month == 3 and ((now().year-2000) % 4 == 0) %}
+          29
+        {% endif %}

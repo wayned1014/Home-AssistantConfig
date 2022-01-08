@@ -1,0 +1,5 @@
+set_livingroom_gc_volume:
+  url: "http://192.168.0.249:3689/api/outputs/2544647392"
+  method: PUT
+  payload: '{"volume" : {{ states.input_number.livingroom_gc_volume_slider.state|round }} }'
+

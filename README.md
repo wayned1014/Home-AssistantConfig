@@ -1,4 +1,6 @@
 # Home Assistant Configuation
+![GitHub last commit](https://img.shields.io/github/last-commit/wayned1014/Home-AssistantConfig)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/wayned1014/Home-AssistantConfig)
 
 I started back at the end of December 2020 using a RaspberryPi 4 with hassOS on a SD-Card and a Aeotec Z-Stick Gen5 Z-wave Plus USB
 
