@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "input_text",
+    "data": {
+        "items": [
+            {
+                "name": "sonos-playlist",
+                "min": 0,
+                "mode": "text",
+                "max": 100,
+                "id": "sonos_playlist"
+            },
+            {
+                "name": "sonos-trigger-text",
+                "min": 0,
+                "mode": "text",
+                "max": 100,
+                "id": "sonos_trigger_text"
+            }
+        ]
+    }
+}

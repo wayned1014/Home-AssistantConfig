@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "input_boolean",
+    "data": {
+        "items": [
+            {
+                "name": "Google Home-Good Night",
+                "id": "google_home_good_night"
+            },
+            {
+                "name": "Google Home-Good Morning",
+                "id": "google_home_good_morning"
+            },
+            {
+                "name": "House-Shutdown",
+                "id": "house_shutdown"
+            },
+            {
+                "name": "ESP Prevent Deep Sleep",
+                "icon": "mdi:sleep-off",
+                "id": "esp_prevent_deep_sleep"
+            },
+            {
+                "name": "google_home_daap",
+                "id": "google_home_daap"
+            },
+            {
+                "name": "sonos_daap",
+                "id": "sonos_daap"
+            },
+            {
+                "name": "sonos-shuffle",
+                "id": "sonos_shuffle"
+            }
+        ]
+    }
+}

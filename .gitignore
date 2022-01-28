@@ -1,4 +1,3 @@
-# Example .gitignore file for your config dir.
 # An * ensures that everything will be ignored.
 /*
 # You can whitelist files/folders with !, these will not be ignored.
@@ -6,7 +5,9 @@
 !.gitignore
 !*.md
 !conf/
-!.storage/lovelace.*
+!.storage/lovelace.lovelace_dashboard1
+!.storage/lovelace.lovelace_dashboard2
+!.storage/lovelace.lovelace_main
 
 # File ignores
 *.log
@@ -18,8 +19,6 @@
 ._*
 __pycache__
 
-# Other files
-.ps4-games.0CFE45A9E980_861a.json
 
 # Ignore folders.
 .storage
