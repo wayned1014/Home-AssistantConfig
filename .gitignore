@@ -6,6 +6,20 @@
 !.gitignore
 !*.md
 !conf/
+!.storage/lovelace.*
+
+# File ignores
+*.log
+*.log.*
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+._*
+__pycache__
+
+# Other files
+.ps4-games.0CFE45A9E980_861a.json
 
 # Ignore folders.
 .storage

@@ -1,0 +1,9 @@
+- sensor:
+    - name: 'ESXi Uptime'
+      state: >
+        {% set days = states["sensor.esxi_vmhost_esxi_01_localdomain"].attributes.uptime_hours/24 %}
+        {% set up_dys = days|int %}
+        {% set hours = (days-up_dys)*24 %}
+        {% set up_hrs = hours|int %}
+        {% set up_mns = ((hours-up_hrs)*60)|int %}
+        {{ up_dys }} days, {{ up_hrs }} hours, {{ up_mns }} mins

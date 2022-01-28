@@ -47,97 +47,9 @@ test_google_home_say:
       entity_id: media_player.gc_living_room_speaker
       message: This is a test
   mode: single
-livingroom_fan_off:
-  alias: Livingroom Fan Off
-  sequence:
-  - service: fan.turn_off
-    target:
-      device_id: 6ee3872cf9317fe13bf397782a44f7cd
-  mode: single
-livingroom_fan_low:
-  alias: Livingroom Fan Low
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: low
-    target:
-      device_id: 6ee3872cf9317fe13bf397782a44f7cd
-  mode: single
-livingroom_fan_medium:
-  alias: Livingroom Fan Medium
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: medium
-    target:
-      device_id: 6ee3872cf9317fe13bf397782a44f7cd
-  mode: single
-livingroom_fan_high:
-  alias: Livingroom Fan High
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: high
-    target:
-      device_id: 6ee3872cf9317fe13bf397782a44f7cd
-  mode: single
-bedroom_fan_off:
-  alias: Bedroom Fan Off
-  sequence:
-  - service: fan.turn_off
-    target:
-      device_id: 6f091281af94473f5b449698e046b23b
-  mode: single
-bedroom_fan_low:
-  alias: Bedroom Fan Low
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: low
-    target:
-      device_id: 6f091281af94473f5b449698e046b23b
-  mode: single
-bedroom_fan_medium:
-  alias: Bedroom Fan Medium
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: medium
-    target:
-      device_id: 6f091281af94473f5b449698e046b23b
-  mode: single
-bedroom_fan_high:
-  alias: Bedroom Fan High
-  sequence:
-  - service: fan.set_speed
-    data:
-      speed: high
-    target:
-      device_id: 6f091281af94473f5b449698e046b23b
-  mode: single
 node_red_test:
   alias: Node-Red Test
   sequence:
-  mode: single
-climate_decrease_temperature:
-  alias: Climate-Decrease Temperature
-  sequence:
-  - service: climate.set_temperature
-    target:
-      device_id: a682805d4b0e5d9aa9f91f56af66ab92
-    data_template:
-      temperature: '{{ (state_attr(''climate.living_room'', ''temperature'')|round(0))
-        - 1 }}'
-  mode: single
-climate_increase_temperature:
-  alias: Climate-Increase Temperature
-  sequence:
-  - service: climate.set_temperature
-    target:
-      device_id: a682805d4b0e5d9aa9f91f56af66ab92
-    data_template:
-      temperature: '{{ (state_attr(''climate.living_room'', ''temperature'')|round(0))
-        + 1 }}'
   mode: single
 google_home_goodnight_2:
   alias: Google Home-Goodnight
@@ -155,30 +67,6 @@ google_home_good_morning:
       entity_id:
       - input_boolean.google_home_good_morning
   mode: single
-homepanel_settings:
-  sequence:
-  - service: mqtt.publish
-    data:
-      topic: wallpanel/mywallpanel/command
-      payload: '{"settings": true}'
-  mode: single
-  alias: HomePanel Settings
-homepanel_wake:
-  alias: HomePanel Wake
-  sequence:
-  - service: mqtt.publish
-    data:
-      topic: wallpanel/mywallpanel/command
-      payload: '{"wake": true}'
-  mode: single
-homepanel_pandora:
-  alias: HomePanel Pandora
-  sequence:
-  - service: mqtt.publish
-    data:
-      topic: wallpanel/mywallpanel/command
-      payload: '{"url": "http://intent:#Intent;launchFlags=0x10000000;component=com.pandora.android/.Main;end"}'
-  mode: single
 house_shutdown:
   sequence:
   - service: input_boolean.turn_on
@@ -187,193 +75,64 @@ house_shutdown:
       - input_boolean.house_shutdown
   mode: single
   alias: House-Shutdown
-daap_sonos_livingroom_off:
-  alias: DAAP-Sonos Livingroom-Off
+sonos_play_playlist:
   sequence:
-  - service: shell_command.owntone_sonos_off
-  - service: shell_command.owntone_tv_off
-  mode: single
-daap_sonos_livingroom_on:
-  alias: DAAP-Sonos Livingroom-On
-  sequence:
-  - service: shell_command.owntone_tv_on
-  - service: shell_command.owntone_sonos_on
-  mode: single
-daap_google_livingroom_on:
-  sequence:
-  - service: media_player.turn_on
+  - service: input_text.set_value
     target:
-      entity_id:
-      - media_player.forked_daapd_output_google_home
-  - service: media_player.volume_set
-    target:
-      entity_id:
-      - media_player.forked_daapd_output_google_home
+      entity_id: input_text.sonos_playlist
     data:
-      volume_level: 0.2
-  mode: single
-  alias: DAAP-Google Livingroom-On
-daap_google_livingroom_off:
-  alias: DAAP-Google Livingroom-Off
-  sequence:
-  - service: media_player.turn_off
+      value: '{{ playlist }}'
+  - service: input_text.set_value
     target:
-      entity_id:
-      - media_player.forked_daapd_output_google_home
+      entity_id: input_text.sonos_trigger_text
+    data:
+      value: playlist
   mode: single
-set_jb_stream:
-  alias: Set Jukebox Stream variables
-  mode: single
+  alias: Sonos-Play_Playlist
+sonos_play_tv:
+  alias: Sonos-Play_TV
   sequence:
   - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_stream
-      value: '{{jb_stream}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_stream_name
-      value: '{{jb_stream_name}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_stream_logo
-      value: '{{jb_stream_logo}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.media_content_type
-      value: '{{media_content_type}}'
-set_jb_speaker:
-  alias: Set Juke Box Speaker variables
-  mode: queued
-  sequence:
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_speaker_entity
-      value: '{{jb_speaker_entity}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_speaker_name
-      value: '{{jb_speaker_name}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_speaker_image
-      value: '{{jb_speaker_image}}'
-  - service: input_text.set_value
-    data_template:
-      entity_id: input_text.jb_speaker_switch
-      value: '{{jb_speaker_switch}}'
-play_media_stream:
-  alias: Play media stream on Selected Media Player
-  mode: restart
-  variables:
-    stream_to_play: '{{ states(''input_text.jb_stream'') }}'
-    stream_type_http: '{{ stream_to_play|truncate(4,false,'''') == ''http''}}'
-    sonos_service_to_play: '{% if stream_type_http -%} media_player.play_media {%-
-      else -%} plex.play_on_sonos {%- endif -%}'
-    sonos_stream_to_play: '{% if stream_type_http -%} {{states(''input_text.jb_sonos_http_prefix'')
-      + states(''input_text.jb_stream'')}} {%- else -%} {{states(''input_text.jb_stream'')}}
-      {%- endif -%}'
-    cast_stream_to_play: '{% if stream_type_http -%} {{states(''input_text.jb_stream'')}}
-      {%- else -%} {{states(''input_text.jb_cast_plex_prefix'') + states(''input_text.jb_stream'')}}
-      {%- endif -%}'
-  sequence:
-  - choose:
-    - conditions: '{{states(''input_text.jb_speaker_switch'')!=''none''}}'
-      sequence:
-      - service: input_text.set_value
-        data:
-          entity_id: input_text.jb_status
-          value: Waiting for Switch
-      - service: script.turn_on_speaker
-        data_template:
-          switch: '{{ states(''input_text.jb_speaker_switch'') }}'
-      - service: input_text.set_value
-        data_template:
-          entity_id: input_text.jb_status
-          value: '{{''Waiting for Speaker '' + states(''input_text.jb_speaker_name'')}}'
-      - wait_template: '{{ not is_state(states(''input_text.jb_speaker_entity''),''unavailable'')
-          }}'
-        timeout: 00:05:00
-      - service: input_text.set_value
-        data:
-          entity_id: input_text.jb_status
-          value: done
-  - choose:
-    - conditions: '{{state_attr(states(''input_text.jb_speaker_entity''),''sonos_group'')==
-        None}}'
-      sequence:
-      - service: script.play_jb_stream
-        data_template:
-          speaker: '{{ states(''input_text.jb_speaker_entity'') }}'
-          stream: '{{ cast_stream_to_play }}'
-          content: '{{ states(''input_text.media_content_type'') }}'
-          service: media_player.play_media
-    default:
-    - service: script.play_jb_stream
-      data_template:
-        speaker: '{{ states(''input_text.jb_speaker_entity'') }}'
-        stream: '{{ sonos_stream_to_play }}'
-        content: '{{ states(''input_text.media_content_type'') }}'
-        service: '{{ sonos_service_to_play }}'
-play_jb_stream:
-  alias: Play Selected music stream
-  mode: queued
-  sequence:
-  - service: '{{service}}'
-    data_template:
-      entity_id: '{{speaker}}'
-      media_content_id: '{{stream}}'
-      media_content_type: '{{content}}'
-turn_on_speaker:
-  alias: Turn on Speaker
-  mode: queued
-  sequence:
-  - condition: template
-    value_template: '{{ not is_state(''input_text.jb_speaker_switch'', ''none'') }}'
-  - service: switch.turn_on
-    data_template:
-      entity_id: '{{states(''input_text.jb_speaker_switch'')}}'
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: '{{ is_state(''input_text.jb_speaker_entity'', ''media_player.living_room'')}}'
-      sequence:
-      - service: remote.turn_on
-        entity_id: remote.harmony_hub
-        data:
-          activity: Listen To Music on Sonos
-    - conditions:
-      - condition: template
-        value_template: '{{ is_state(''input_text.jb_speaker_entity'', ''media_player.living_room_system'')}}'
-      sequence:
-      - service: remote.turn_on
-        entity_id: remote.harmony_hub
-        data:
-          activity: Listen To Music on Google
-play_media_stream_1:
-  mode: single
-  alias: Play media stream on Selected Media Player 1
-  sequence:
-  - service: script.play_jb_stream_1
-    data_template:
-      source: '{{ states(''input_text.jb_stream'') }}'
-      service: media_player.select_source
-play_jb_stream_1:
-  sequence:
-  - service: '{{service}}'
-    data_template:
-      source: '{{source}}'
     target:
-      entity_id: media_player.forked_daapd_server
-  - service: media_player.media_play
-    target:
-      entity_id: media_player.forked_daapd_server
-  alias: Play Selected music stream 1
+      entity_id: input_text.sonos_trigger_text
+    data:
+      value: TV
   mode: single
-test_panel_deleteme:
-  alias: Test Panel-DELETEME
+a_test_toggle:
+  alias: A-Test Toggle
   sequence:
-  - type: toggle
-    device_id: d6126d1e8c27e88275cf89906b10d4c0
-    entity_id: switch.tasmota
-    domain: switch
+  - service: input_boolean.toggle
+    target:
+      entity_id: input_boolean.sonos_shuffle
+  - service: media_player.shuffle_set
+    target:
+      entity_id: media_player.sonos_arc_2
+    data:
+      shuffle: '{{ states.input_boolean.sonos_shuffle.state }}'
+  mode: single
+sonos_shuffle:
+  alias: Sonos-Shuffle
+  sequence:
+  - service: input_boolean.toggle
+    target:
+      entity_id: input_boolean.sonos_shuffle
+  - service: media_player.shuffle_set
+    target:
+      entity_id: media_player.sonos_arc_2
+    data:
+      shuffle: '{{ states.input_boolean.sonos_shuffle.state }}'
+  mode: single
+sonos_play_siriusxm:
+  alias: Sonos-Play_SiriusXM
+  sequence:
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.sonos_playlist
+    data:
+      value: '{{ playlist }}'
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.sonos_trigger_text
+    data:
+      value: siriusxm
   mode: single

@@ -1,0 +1,4 @@
+- sensor:
+    - name: 'Sonos_Arc_Source'
+      state: '{{ states["media_player.sonos_arc_2"].attributes.source }}'
+      
