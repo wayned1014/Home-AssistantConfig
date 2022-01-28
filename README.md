@@ -32,3 +32,7 @@ This is the Music dashboard on the fire tablet:
 
 ![alt text](https://github.com/wayned1014/Home-AssistantConfig/blob/master/images/dashboard4.png?raw=true)
 
+And this is what I use on my laptop and android:
+
+![alt text](https://github.com/wayned1014/Home-AssistantConfig/blob/master/images/main.png?raw=true)
+
