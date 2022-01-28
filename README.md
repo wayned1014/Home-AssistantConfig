@@ -24,3 +24,7 @@ Software:
   - OwnTone(Music Streaming)
   - UniFi Network Application
 
+This is my dashboard on the fire tablet:
+
+![alt text](https://github.com/wayned1014/Home-AssistantConfig/blob/master/images/dashboard1.png?raw=true)
+
