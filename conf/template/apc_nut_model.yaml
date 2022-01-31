@@ -1,0 +1,3 @@
+- sensor:
+    - name: 'APC NUT Model'
+      state: 'Back-UPS XS 1000M'

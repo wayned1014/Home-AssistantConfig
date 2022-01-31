@@ -1315,6 +1315,192 @@
                                 "type": "custom:webrtc-camera",
                                 "entity": "camera.doorbell"
                             }
+                        },
+                        {
+                            "id": "nuc_status",
+                            "type": "custom:config-template-card",
+                            "variables": [
+                                "states['sensor.apc_nut_model'].state",
+                                "states['sensor.apc_nut_status'].state",
+                                "states['sensor.apc_nut_battery_charge'].state",
+                                "states['sensor.apc_nut_load'].state",
+                                "states['sensor.apc_nut_input_voltage'].state",
+                                "states['sensor.apc_nut_battery_voltage'].state"
+                            ],
+                            "entities": [
+                                "sensor.apc_nut_model",
+                                "sensor.apc_nut_status",
+                                "sensor.apc_nut_battery_charge",
+                                "sensor.apc_nut_load",
+                                "sensor.apc_nut_input_voltage",
+                                "sensor.apc_nut_battery_voltage"
+                            ],
+                            "card": {
+                                "type": "entities",
+                                "show_header_toggle": "off",
+                                "style": ".card-header {\n  padding: 0px 0px 0px 0px !important;\n}\n",
+                                "entities": [
+                                    {
+                                        "type": "section",
+                                        "style": ".label {\n  text-align: center !important;\n  margin-left: 0px !important;\n  font-size: 17px !important;\n}\n",
+                                        "label": "${ 'APC --- ' + vars[0] + ' --- ' + vars[1] }"
+                                    },
+                                    {
+                                        "type": "custom:hui-vertical-stack-card",
+                                        "cards": [
+                                            {
+                                                "type": "horizontal-stack",
+                                                "cards": [
+                                                    {
+                                                        "type": "picture",
+                                                        "style": "ha-card { \n    --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n}\n",
+                                                        "image": "/local/images/apc_xs-1000m.png"
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "layout": "icon_name_state2nd",
+                                                        "show_icon": true,
+                                                        "show_state": true,
+                                                        "styles": {
+                                                            "grid": null,
+                                                            "card": [
+                                                                {
+                                                                    "--ha-card-background": "rgba(0, 0, 0, 0.0)"
+                                                                },
+                                                                {
+                                                                    "--ha-card-box-shadow": "none"
+                                                                }
+                                                            ],
+                                                            "icon": [
+                                                                {
+                                                                    "padding": "10px 0px 0px"
+                                                                },
+                                                                {
+                                                                    "height": "40px"
+                                                                },
+                                                                {
+                                                                    "width": "40px"
+                                                                }
+                                                            ],
+                                                            "state": [
+                                                                {
+                                                                    "padding": "10px 0px 0px"
+                                                                },
+                                                                {
+                                                                    "justify-self": "start"
+                                                                },
+                                                                {
+                                                                    "font-family": "Roboto, sans-serif"
+                                                                },
+                                                                {
+                                                                    "font-size": "14px"
+                                                                }
+                                                            ],
+                                                            "name": [
+                                                                {
+                                                                    "padding": "20px 0px 0px"
+                                                                },
+                                                                {
+                                                                    "justify-self": "start"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "entity": "sensor.apc_nut_battery_runtime_minutes",
+                                                        "name": "Remaining:",
+                                                        "icon": "mdi:battery-high"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "horizontal-stack",
+                                                "cards": [
+                                                    {
+                                                        "type": "custom:bar-card",
+                                                        "show_icon": true,
+                                                        "align": "split",
+                                                        "columns": 1,
+                                                        "max": 100,
+                                                        "positions": {
+                                                            "icon": "inside",
+                                                            "indicator": "inside",
+                                                            "name": "inside",
+                                                            "value": "inside"
+                                                        },
+                                                        "unit_of_measurement": "%",
+                                                        "severity": [
+                                                            {
+                                                                "value": 50,
+                                                                "color": "#3498db"
+                                                            },
+                                                            {
+                                                                "value": 75,
+                                                                "color": "#f39c12"
+                                                            },
+                                                            {
+                                                                "value": 100,
+                                                                "color": "#e45e65"
+                                                            }
+                                                        ],
+                                                        "style": "ha-card { \n  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n  --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n  --paper-item-icon-color: 'var(--text-primary-color)';\n  --ha-card-box-shadow: 'none';\n}\nbar-card-name {\n  margin-left: -10px;\n}\n",
+                                                        "entity": "sensor.apc_nut_battery_charge",
+                                                        "name": "Battery",
+                                                        "icon": "mdi:battery-high",
+                                                        "entity_row": true
+                                                    },
+                                                    {
+                                                        "type": "custom:bar-card",
+                                                        "show_icon": true,
+                                                        "align": "split",
+                                                        "columns": 1,
+                                                        "max": 100,
+                                                        "positions": {
+                                                            "icon": "inside",
+                                                            "indicator": "inside",
+                                                            "name": "inside",
+                                                            "value": "inside"
+                                                        },
+                                                        "unit_of_measurement": "%",
+                                                        "severity": [
+                                                            {
+                                                                "value": 50,
+                                                                "color": "#3498db"
+                                                            },
+                                                            {
+                                                                "value": 75,
+                                                                "color": "#f39c12"
+                                                            },
+                                                            {
+                                                                "value": 100,
+                                                                "color": "#e45e65"
+                                                            }
+                                                        ],
+                                                        "style": "ha-card { \n  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n  --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n  --paper-item-icon-color: 'var(--text-primary-color)';\n  --ha-card-box-shadow: 'none';\n}\nbar-card-name {\n  margin-left: -10px;\n}\n",
+                                                        "entity": "sensor.apc_nut_load",
+                                                        "name": "${ 'Load' }",
+                                                        "entity_row": true
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "entities",
+                                                "entities": [
+                                                    {
+                                                        "entity": "sensor.apc_nut_input_voltage",
+                                                        "name": "Input Voltage",
+                                                        "icon": "mdi:power-plug"
+                                                    },
+                                                    {
+                                                        "entity": "sensor.apc_nut_battery_voltage",
+                                                        "name": "Battery Voltage",
+                                                        "icon": "mdi:battery-charging-high"
+                                                    }
+                                                ],
+                                                "style": "ha-card { \n    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n    --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n    --paper-item-icon-color: 'var(--text-primary-color)';\n    --ha-card-box-shadow: 'none';\n}\n"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
                         }
                     ]
                 },

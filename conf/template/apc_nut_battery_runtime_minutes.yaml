@@ -1,0 +1,3 @@
+- sensor:
+    - name: 'APC NUT Battery Runtime Minutes'
+      state: "{{ (states.sensor.apc_nut_battery_runtime.state | float / 60) | int }} min {{ (states.sensor.apc_nut_battery_runtime.state | int) - ((states.sensor.apc_nut_battery_runtime.state | float / 60) | int * 60) }} sec"
