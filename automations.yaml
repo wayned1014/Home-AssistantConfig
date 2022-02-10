@@ -44,3 +44,24 @@
       entity_id: input_number.livingroom_gc_volume_slider
       value: '{{ states.sensor.bedroom_volume_slider.state }}'
   mode: single
+- id: '1644438643517'
+  alias: OwnTone-Switch To Group
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.owntone_output_living_room_gh
+  - platform: state
+    entity_id: media_player.owntone_output_bedroom_speaker
+  condition:
+  - condition: state
+    entity_id: media_player.owntone_output_living_room_gh
+    state: 'on'
+  - condition: state
+    entity_id: media_player.owntone_output_bedroom_speaker
+    state: 'on'
+  action:
+  - service: media_player.turn_on
+    data: {}
+    target:
+      entity_id: media_player.owntone_output_home_group
+  mode: single

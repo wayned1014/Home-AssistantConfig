@@ -2,4 +2,4 @@
     - name: 'Current Date Time'
       state: >
         {% set x = states('sensor.time') %}
-        {{ now().strftime("%a, %b %-d, %Y - ") + now().strftime("%I:%M %p") }}
+        {{ now().strftime("%a, %b %-d, %Y - ") + now().strftime("%I:%M %p") }} - {{ states["sensor.0x00158d00070510be_temperature"].state | round(1,default=0) }} {{ states["sensor.0x00158d00070510be_temperature"].attributes.unit_of_measurement }}

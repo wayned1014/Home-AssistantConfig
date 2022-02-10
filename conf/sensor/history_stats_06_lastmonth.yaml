@@ -3,7 +3,7 @@
   entity_id: sensor.hvac_status
   state: ['heating_on', 'heat_cool_heating_on']
   type: time
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
 
 - platform: history_stats
@@ -11,7 +11,7 @@
   entity_id: sensor.hvac_status
   state: ['heating_on', 'heat_cool_heating_on']
   type: ratio
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
 
 - platform: history_stats
@@ -19,7 +19,7 @@
   entity_id: sensor.hvac_status
   state: ['heating_on', 'heat_cool_heating_on']
   type: count
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
 
 - platform: history_stats
@@ -27,7 +27,7 @@
   entity_id: sensor.hvac_status
   state: ['cooling_on', 'heat_cool_cooling_on']
   type: time
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
 
 - platform: history_stats
@@ -35,7 +35,7 @@
   entity_id: sensor.hvac_status
   state: ['cooling_on', 'heat_cool_cooling_on']
   type: ratio
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
 
 - platform: history_stats
@@ -43,6 +43,6 @@
   entity_id: sensor.hvac_status
   state: ['cooling_on', 'heat_cool_cooling_on']
   type: count
-  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int) *24*3600)) }}"
+  start: "{{ (as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) - ((states['sensor.days_in_month'].state | int(0)) *24*3600)) }}"
   end: "{{ as_timestamp(now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0)) }}"
   

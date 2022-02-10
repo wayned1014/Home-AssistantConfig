@@ -271,7 +271,7 @@
                             "cards": [
                                 {
                                     "type": "weather-forecast",
-                                    "entity": "weather.home",
+                                    "entity": "weather.kldj_daynight",
                                     "show_forecast": true,
                                     "name": "Avenel, NJ"
                                 }
@@ -1159,34 +1159,6 @@
                             ]
                         },
                         {
-                            "type": "conditional",
-                            "conditions": [
-                                {
-                                    "entity": "sensor.weatheralerts_1_alerts_are_active",
-                                    "state": "Yes"
-                                }
-                            ],
-                            "card": {
-                                "content": "<hr>  {% set alerts = [\n  \"sensor.weatheralerts_1_alert_1\",\n  \"sensor.weatheralerts_1_alert_2\",\n  \"sensor.weatheralerts_1_alert_3\",\n  \"sensor.weatheralerts_1_alert_4\",\n  \"sensor.weatheralerts_1_alert_5\"] %}\n{% for alert in alerts if is_state(alert, 'on') %} {% if 'warning' or 'severe' in state_attr( alert, 'display_title')|lower() %} <font color=\"red\">  {% endif %} <b>{{ state_attr( alert, 'display_title') }}</b>  {%- if 'warning' or 'severe' in state_attr( alert, 'display_title')|lower() -%} </font> {%- endif %} <br>{{ state_attr( alert, 'display_message') }} {% if loop.last %} {% else %} <hr> {% endif %} {% endfor %}\n",
-                                "title": "Weather Alerts",
-                                "type": "markdown"
-                            }
-                        },
-                        {
-                            "type": "conditional",
-                            "conditions": [
-                                {
-                                    "entity": "sensor.weatheralerts_1_alerts_are_active",
-                                    "state": "Yes"
-                                }
-                            ],
-                            "card": {
-                                "content": "{% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'warning_count')|int > 1) %}\n   <font color=\"red\"><center><h2>****** WEATHER WARNINGS ******\n   ** ARE ACTIVE FOR YOUR AREA **</h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'warning_count')|int == 1) %}\n   <font color=\"red\"><center><h2>****** A WEATHER WARNING ******\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'watch_count')|int > 1) %}\n   <font color=\"orange\"><center><h2>******* WEATHER WATCHES *******\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'watch_count')|int == 1) %}\n   <font color=\"orange\"><center><h2>******* A WEATHER WATCH *******\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'advisory_count')|int > 1) %}\n   <font color=\"orange\"><center><h2>***** WEATHER ADVISORIES *****\n   <br>** ARE ACTIVE FOR YOUR AREA ** </h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'advisory_count')|int == 1) %}\n   <font color=\"orange\"><center><h2>***** A WEATHER ADVISORY *****\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center></font>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'statement_count')|int > 1) %}\n   <center><h2>***** WEATHER STATEMENTS *****\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'statement_count')|int == 1) %}\n   <center><h2>***** A WEATHER STATEMENT *****\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'outlook_count')|int > 1) %}\n   <center><h2>****** WEATHER OUTLOOKS ******\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'outlook_count')|int == 1) %}\n   <center><h2>****** A WEATHER OUTLOOK ******\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'alert_count')|int > 1) %}\n   <center><h2>******* WEATHER ALERTS *******\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'alert_count')|int == 1) %}\n   <center><h2>******* A WEATHER ALERT *******\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'message_count')|int > 1) %}\n   <center><h2>****** WEATHER MESSAGES ******\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'message_count')|int == 1) %}\n   <center><h2>****** A WEATHER MESSAGE ******\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'important_count')|int > 1) %}\n   <center><h2>** IMPORTANT WEATHER ALERTS **\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'important_count')|int == 1) %}\n   <center><h2>** AN IMPORTANT WEATHER ALERT **\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'test_count')|int > 1) %}\n   <center><h2>**** WEATHER ALERT TESTS ****\n   <br>** ARE ACTIVE FOR YOUR AREA **</h2></center>\n{% endif %} {% if (state_attr( 'sensor.weatheralerts_1_active_alerts', 'test_count')|int == 1) %}\n   <center><h2>**** A WEATHER ALERT TEST ****\n   <br>*** IS ACTIVE FOR YOUR AREA ***</h2></center>\n{% endif %}",
-                                "type": "markdown",
-                                "title": "Weather Alerts 2"
-                            }
-                        },
-                        {
                             "type": "custom:layout-card",
                             "layout": "vertical",
                             "column_width": "100%",
@@ -1501,6 +1473,11 @@
                                     }
                                 ]
                             }
+                        },
+                        {
+                            "type": "custom:sun-card",
+                            "showAzimuth": true,
+                            "showElevation": true
                         }
                     ]
                 },

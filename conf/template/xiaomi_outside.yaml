@@ -1,0 +1,9 @@
+- sensor:
+    - name: 'Xiaomi Outside'
+      unit_of_measurement: '°F'
+      state: '{{ states["sensor.0x00158d00070510be_temperature"].state }}'
+      icon: mdi:thermometer
+      attributes:
+        battery: '{{ states["sensor.0x00158d00070510be_battery"].state }}'
+        humidity: '{{ states["sensor.0x00158d00070510be_humidity"].state }}'
+        pressure: '{{ states["sensor.0x00158d00070510be_pressure"].state }}'

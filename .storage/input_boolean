@@ -22,16 +22,12 @@
                 "id": "esp_prevent_deep_sleep"
             },
             {
-                "name": "google_home_daap",
-                "id": "google_home_daap"
-            },
-            {
-                "name": "sonos_daap",
-                "id": "sonos_daap"
-            },
-            {
                 "name": "sonos-shuffle",
                 "id": "sonos_shuffle"
+            },
+            {
+                "name": "owntone-shuffle",
+                "id": "owntone_shuffle"
             }
         ]
     }

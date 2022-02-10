@@ -136,3 +136,60 @@ sonos_play_siriusxm:
     data:
       value: siriusxm
   mode: single
+google_cast_play_playlist:
+  sequence:
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.owntone_server
+    data:
+      source: '{{ playlist }}'
+  - service: media_player.media_play
+    target:
+      entity_id: media_player.owntone_server
+  mode: single
+  alias: Google Cast-Play Playlist
+owntone_play_playlist:
+  alias: OwnTone-Play Playlist
+  sequence:
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.owntone_server
+    data:
+      source: '{{ playlist }}'
+  - service: media_player.media_play
+    target:
+      entity_id: media_player.owntone_server
+  mode: single
+owntone_shuffle:
+  alias: OwnTone-Shuffle
+  sequence:
+  - service: input_boolean.toggle
+    target:
+      entity_id:
+      - input_boolean.owntone_shuffle
+  - service: media_player.shuffle_set
+    target:
+      entity_id: media_player.owntone_server
+    data:
+      shuffle: '{{ states.input_boolean.owntone_shuffle.state }}'
+  mode: single
+owntone_power_off:
+  sequence:
+  - service: media_player.clear_playlist
+    data: {}
+    target:
+      entity_id: media_player.owntone_server
+  - service: media_player.turn_off
+    data: {}
+    target:
+      entity_id:
+      - media_player.owntone_output_living_room_sonos
+      - media_player.owntone_output_living_room_gh
+      - media_player.owntone_output_bedroom_speaker
+  - service: media_player.select_source
+    data:
+      source: TV
+    target:
+      entity_id: media_player.sonos_arc_2
+  mode: single
+  alias: OwnTone-Power_Off

@@ -1,8 +1,0 @@
-- platform: rest
-  name: Livingroom GC Speakers
-  resource: http://192.168.0.249:3689/api/outputs/2544647392
-  method: PUT
-  body_on: '{"selected": true}'
-  body_off: '{"selected": false}'
-  is_on_template: '{% if value_json is defined %} {{ value_json.selected }} {% else %} off {% endif %}'
-  scan_interval: 5

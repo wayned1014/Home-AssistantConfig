@@ -1,0 +1,743 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_dashboard5",
+    "data": {
+        "config": {
+            "kiosk_mode": {
+                "non_admin_settings": {
+                    "kiosk": true,
+                    "hide_overflow": true
+                }
+            },
+            "button_card_templates": {
+                "container": {
+                    "color_type": "label-card",
+                    "color": "dimgray",
+                    "styles": {
+                        "card": [
+                            {
+                                "padding": 0
+                            }
+                        ],
+                        "name": [
+                            {
+                                "border-radius": "0.4em 0.4em 0 0"
+                            },
+                            {
+                                "padding": "0.1em"
+                            },
+                            {
+                                "width": "100%"
+                            },
+                            {
+                                "font-weight": "bold"
+                            }
+                        ],
+                        "grid": [
+                            {
+                                "grid-template-areas": "\"i\" \"n\" \"buttons\""
+                            },
+                            {
+                                "grid-template-columns": "1fr"
+                            },
+                            {
+                                "grid-template-rows": "1fr min-content min-content"
+                            }
+                        ],
+                        "custom_fields": {
+                            "buttons": [
+                                {
+                                    "background-color": "rgba(0,0,0,0.3)"
+                                },
+                                {
+                                    "margin": 0
+                                },
+                                {
+                                    "padding": "0.3em"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "views": [
+                {
+                    "title": "Home",
+                    "type": "panel",
+                    "theme": "kibibit",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "custom:stack-in-card",
+                            "cards": [
+                                {
+                                    "type": "custom:button-card",
+                                    "template": "container",
+                                    "color": "var(--paper-card-background-color)",
+                                    "name": "Music Playlists",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "--paper-card-background-color": "rgba(0, 0, 0, 0.3)"
+                                            },
+                                            {
+                                                "color": "white"
+                                            }
+                                        ],
+                                        "custom_fields": {
+                                            "buttons": [
+                                                {
+                                                    "background-color": "rgba(0,0,0,0.3)"
+                                                },
+                                                {
+                                                    "margin": 0
+                                                },
+                                                {
+                                                    "padding": "0.3em"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "custom_fields": {
+                                        "buttons": {
+                                            "card": {
+                                                "type": "grid",
+                                                "columns": 9,
+                                                "square": false,
+                                                "cards": [
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Favorites",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Favorites (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Soul Cruisers",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Soul Cruisers (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Gary US Bonds",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Gary US Bonds (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Classic FM",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Classic FM (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Radio Paradise",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Radio Paradise (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Radio Paradise Mellow Mix",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Radio Paradise Mellow Mix (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Radio Paradise Rock Mix",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Radio Paradise Rock Mix (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Radio Paradise World-Etc Mix",
+                                                        "icon": "mdi:music",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_play_playlist",
+                                                            "service_data": {
+                                                                "playlist": "Radio Paradise World-Etc Mix (playlist)"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Off",
+                                                        "icon": "mdi:power",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_power_off",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_server"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "type": "divider",
+                                            "style": {
+                                                "height": "2px"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:mini-media-player",
+                                    "tap_action": false,
+                                    "group": false,
+                                    "volume_stateless": false,
+                                    "entity": "media_player.owntone_server",
+                                    "toggle_power": false,
+                                    "info": "short",
+                                    "scale": "2",
+                                    "source": "icon",
+                                    "sound_mode": "icon",
+                                    "artwork": "cover-fit",
+                                    "style": ":host {\n  --mini-media-player-scale: 80px;\n  --mini-media-player-progress-height: 10px;\n}\n",
+                                    "hide": {
+                                        "prev": true,
+                                        "next": true,
+                                        "play_pause": true,
+                                        "source": true,
+                                        "power": true,
+                                        "icon": false,
+                                        "volume": true,
+                                        "volume_level": true,
+                                        "runtime": false,
+                                        "name": true
+                                    }
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "type": "divider",
+                                            "style": {
+                                                "height": "2px"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:button-card",
+                                    "template": "container",
+                                    "color": "var(--paper-card-background-color)",
+                                    "name": "Player Controls",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "--paper-card-background-color": "rgba(0, 0, 0, 0.3)"
+                                            },
+                                            {
+                                                "color": "white"
+                                            }
+                                        ],
+                                        "custom_fields": {
+                                            "buttons": [
+                                                {
+                                                    "background-color": "rgba(0,0,0,0.3)"
+                                                },
+                                                {
+                                                    "margin": 0
+                                                },
+                                                {
+                                                    "padding": "0.3em"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "custom_fields": {
+                                        "buttons": {
+                                            "card": {
+                                                "type": "grid",
+                                                "columns": 9,
+                                                "square": false,
+                                                "cards": [
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Previous Track",
+                                                        "icon": "mdi:skip-backward",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.media_previous_track",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_server"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Next Track",
+                                                        "icon": "mdi:skip-forward",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.media_next_track",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_server"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "name": "Play/Pause",
+                                                        "entity": "media_player.owntone_server",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.media_play_pause",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_server"
+                                                            }
+                                                        },
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "playing",
+                                                                "icon": "mdi:pause"
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "paused",
+                                                                "icon": "mdi:play"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "entity": "input_boolean.owntone_shuffle",
+                                                        "name": "Shuffle",
+                                                        "icon": "mdi:shuffle-variant",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "script.owntone_shuffle"
+                                                        },
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "off",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "on",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgb(120,120,120)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "custom:button-card",
+                                    "template": "container",
+                                    "color": "var(--paper-card-background-color)",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "--paper-card-background-color": "rgba(0, 0, 0, 0.3)"
+                                            },
+                                            {
+                                                "color": "white"
+                                            }
+                                        ],
+                                        "custom_fields": {
+                                            "buttons": [
+                                                {
+                                                    "background-color": "rgba(0,0,0,0.0)"
+                                                },
+                                                {
+                                                    "margin": 0
+                                                },
+                                                {
+                                                    "padding": "0.3em"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "custom_fields": {
+                                        "buttons": {
+                                            "card": {
+                                                "type": "grid",
+                                                "columns": 9,
+                                                "square": false,
+                                                "styles": {
+                                                    "label": [
+                                                        {
+                                                            "font-size": "0.90em"
+                                                        },
+                                                        {
+                                                            "white-space": "normal"
+                                                        }
+                                                    ]
+                                                },
+                                                "cards": [
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "entity": "media_player.owntone_output_living_room_sonos",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.toggle",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_output_living_room_sonos"
+                                                            }
+                                                        },
+                                                        "name": "Sonos",
+                                                        "icon": "mdi:soundbar",
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "off",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgba(0,0,0,0.3)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "on",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgb(120,120,120)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "entity": "media_player.owntone_output_living_room_gh",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.toggle",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_output_living_room_gh"
+                                                            }
+                                                        },
+                                                        "name": "Livingroom",
+                                                        "icon": "mdi:google-home",
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "off",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgba(0,0,0,0.3)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "on",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgb(120,120,120)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "entity": "media_player.owntone_output_bedroom_speaker",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.toggle",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_output_bedroom_speaker"
+                                                            }
+                                                        },
+                                                        "name": "Bedroom",
+                                                        "icon": "mdi:google-home",
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "off",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgba(0,0,0,0.3)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "on",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgb(120,120,120)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "custom:button-card",
+                                                        "entity": "media_player.owntone_output_home_group",
+                                                        "tap_action": {
+                                                            "action": "call-service",
+                                                            "service": "media_player.toggle",
+                                                            "service_data": {
+                                                                "entity_id": "media_player.owntone_output_home_group"
+                                                            }
+                                                        },
+                                                        "name": "Group",
+                                                        "icon": "mdi:google-home",
+                                                        "state": [
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "off",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgba(0,0,0,0.3)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "operator": "==",
+                                                                "value": "on",
+                                                                "styles": {
+                                                                    "card": [
+                                                                        {
+                                                                            "background-color": "rgb(120,120,120)"
+                                                                        },
+                                                                        {
+                                                                            "color": "white"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "media_player.owntone_output_living_room_sonos",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "custom:mini-media-player",
+                                        "entity": "media_player.owntone_output_living_room_sonos",
+                                        "name": "Cast to Google Home-Sonos",
+                                        "tap_action": false,
+                                        "hide": {
+                                            "power": true,
+                                            "play_pause": true,
+                                            "icon": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "media_player.owntone_output_living_room_gh",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "custom:mini-media-player",
+                                        "entity": "media_player.owntone_output_living_room_gh",
+                                        "name": "Cast to Google Home-Livingroom",
+                                        "tap_action": false,
+                                        "hide": {
+                                            "power": true,
+                                            "play_pause": true,
+                                            "icon": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "media_player.owntone_output_bedroom_speaker",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "custom:mini-media-player",
+                                        "entity": "media_player.owntone_output_bedroom_speaker",
+                                        "name": "Cast to Google Home-Bedroom",
+                                        "tap_action": false,
+                                        "hide": {
+                                            "power": true,
+                                            "play_pause": true,
+                                            "icon": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "conditional",
+                                    "conditions": [
+                                        {
+                                            "entity": "media_player.owntone_output_home_group",
+                                            "state": "on"
+                                        }
+                                    ],
+                                    "card": {
+                                        "type": "custom:mini-media-player",
+                                        "entity": "media_player.owntone_output_home_group",
+                                        "name": "Cast to Google Home-Group",
+                                        "tap_action": false,
+                                        "hide": {
+                                            "power": true,
+                                            "play_pause": true,
+                                            "icon": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "type": "divider",
+                                            "style": {
+                                                "height": "2px"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:button-card",
+                                    "show_icon": false,
+                                    "show_state": false,
+                                    "show_name": true,
+                                    "name": "Return",
+                                    "tap_action": {
+                                        "action": "navigate",
+                                        "navigation_path": "/lovelace-dashboard1/0"
+                                    },
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "padding": 0
+                                            },
+                                            {
+                                                "height": "50px"
+                                            }
+                                        ],
+                                        "state": [
+                                            {
+                                                "font-size": "2.0em"
+                                            },
+                                            {
+                                                "white-space": "normal"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

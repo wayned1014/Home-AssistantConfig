@@ -1,4 +1,0 @@
-- sensor:
-    - name: 'Outside Temp'
-      unit_of_measurement: '°F'
-      state: '{{ states["weather.home"].attributes.temperature }}'
