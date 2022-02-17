@@ -1,7 +1,7 @@
 {
     "version": 1,
     "minor_version": 1,
-    "key": "lovelace.lovelace_dashboard5",
+    "key": "lovelace.lovelace_dashboard6",
     "data": {
         "config": {
             "kiosk_mode": {
@@ -75,7 +75,7 @@
                                     "type": "custom:button-card",
                                     "template": "container",
                                     "color": "var(--paper-card-background-color)",
-                                    "name": "Music Playlists - Living Room",
+                                    "name": "Music Playlists - Bedroom",
                                     "styles": {
                                         "card": [
                                             {
@@ -112,7 +112,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Favorites (playlist)"
                                                             }
@@ -124,7 +124,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Soul Cruisers (playlist)"
                                                             }
@@ -136,7 +136,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Gary US Bonds (playlist)"
                                                             }
@@ -148,7 +148,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Classic FM (playlist)"
                                                             }
@@ -160,7 +160,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Radio Paradise (playlist)"
                                                             }
@@ -172,7 +172,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Radio Paradise Mellow Mix (playlist)"
                                                             }
@@ -184,7 +184,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Radio Paradise Rock Mix (playlist)"
                                                             }
@@ -196,7 +196,7 @@
                                                         "icon": "mdi:music",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_play_playlist",
+                                                            "service": "script.owntone01_play_playlist",
                                                             "service_data": {
                                                                 "playlist": "Radio Paradise World-Etc Mix (playlist)"
                                                             }
@@ -208,9 +208,9 @@
                                                         "icon": "mdi:power",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_power_off",
+                                                            "service": "script.owntone01_power_off",
                                                             "service_data": {
-                                                                "entity_id": "media_player.owntone_server"
+                                                                "entity_id": "media_player.owntone01_server"
                                                             }
                                                         }
                                                     }
@@ -235,7 +235,7 @@
                                     "tap_action": false,
                                     "group": false,
                                     "volume_stateless": false,
-                                    "entity": "media_player.owntone_server",
+                                    "entity": "media_player.owntone01_server",
                                     "toggle_power": false,
                                     "info": "short",
                                     "scale": "2",
@@ -310,7 +310,7 @@
                                                             "action": "call-service",
                                                             "service": "media_player.media_previous_track",
                                                             "service_data": {
-                                                                "entity_id": "media_player.owntone_server"
+                                                                "entity_id": "media_player.owntone01_server"
                                                             }
                                                         }
                                                     },
@@ -322,19 +322,19 @@
                                                             "action": "call-service",
                                                             "service": "media_player.media_next_track",
                                                             "service_data": {
-                                                                "entity_id": "media_player.owntone_server"
+                                                                "entity_id": "media_player.owntone01_server"
                                                             }
                                                         }
                                                     },
                                                     {
                                                         "type": "custom:button-card",
                                                         "name": "Play/Pause",
-                                                        "entity": "media_player.owntone_server",
+                                                        "entity": "media_player.owntone01_server",
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "media_player.media_play_pause",
                                                             "service_data": {
-                                                                "entity_id": "media_player.owntone_server"
+                                                                "entity_id": "media_player.owntone01_server"
                                                             }
                                                         },
                                                         "state": [
@@ -352,12 +352,12 @@
                                                     },
                                                     {
                                                         "type": "custom:button-card",
-                                                        "entity": "input_boolean.owntone_shuffle",
+                                                        "entity": "input_boolean.owntone01_shuffle",
                                                         "name": "Shuffle",
                                                         "icon": "mdi:shuffle-variant",
                                                         "tap_action": {
                                                             "action": "call-service",
-                                                            "service": "script.owntone_shuffle"
+                                                            "service": "script.owntone01_shuffle"
                                                         },
                                                         "state": [
                                                             {
@@ -438,101 +438,15 @@
                                                 "cards": [
                                                     {
                                                         "type": "custom:button-card",
-                                                        "entity": "media_player.owntone_output_living_room_sonos",
+                                                        "entity": "media_player.owntone01_output_bedroom_speaker",
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "media_player.toggle",
                                                             "service_data": {
-                                                                "entity_id": "media_player.owntone_output_living_room_sonos"
+                                                                "entity_id": "media_player.owntone01_output_bedroom_speaker"
                                                             }
                                                         },
-                                                        "name": "Sonos",
-                                                        "icon": "mdi:soundbar",
-                                                        "state": [
-                                                            {
-                                                                "operator": "==",
-                                                                "value": "off",
-                                                                "styles": {
-                                                                    "card": [
-                                                                        {
-                                                                            "background-color": "rgba(0,0,0,0.3)"
-                                                                        },
-                                                                        {
-                                                                            "color": "white"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            },
-                                                            {
-                                                                "operator": "==",
-                                                                "value": "on",
-                                                                "styles": {
-                                                                    "card": [
-                                                                        {
-                                                                            "background-color": "rgb(120,120,120)"
-                                                                        },
-                                                                        {
-                                                                            "color": "white"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "type": "custom:button-card",
-                                                        "entity": "media_player.owntone_output_living_room_gh",
-                                                        "tap_action": {
-                                                            "action": "call-service",
-                                                            "service": "media_player.toggle",
-                                                            "service_data": {
-                                                                "entity_id": "media_player.owntone_output_living_room_gh"
-                                                            }
-                                                        },
-                                                        "name": "Livingroom",
-                                                        "icon": "mdi:google-home",
-                                                        "state": [
-                                                            {
-                                                                "operator": "==",
-                                                                "value": "off",
-                                                                "styles": {
-                                                                    "card": [
-                                                                        {
-                                                                            "background-color": "rgba(0,0,0,0.3)"
-                                                                        },
-                                                                        {
-                                                                            "color": "white"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            },
-                                                            {
-                                                                "operator": "==",
-                                                                "value": "on",
-                                                                "styles": {
-                                                                    "card": [
-                                                                        {
-                                                                            "background-color": "rgb(120,120,120)"
-                                                                        },
-                                                                        {
-                                                                            "color": "white"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "type": "custom:button-card",
-                                                        "entity": "media_player.owntone_output_home_group",
-                                                        "tap_action": {
-                                                            "action": "call-service",
-                                                            "service": "media_player.toggle",
-                                                            "service_data": {
-                                                                "entity_id": "media_player.owntone_output_home_group"
-                                                            }
-                                                        },
-                                                        "name": "Group",
+                                                        "name": "Bedroom",
                                                         "icon": "mdi:google-home",
                                                         "state": [
                                                             {
@@ -574,54 +488,14 @@
                                     "type": "conditional",
                                     "conditions": [
                                         {
-                                            "entity": "media_player.owntone_output_living_room_sonos",
+                                            "entity": "media_player.owntone01_output_bedroom_speaker",
                                             "state": "on"
                                         }
                                     ],
                                     "card": {
                                         "type": "custom:mini-media-player",
-                                        "entity": "media_player.owntone_output_living_room_sonos",
-                                        "name": "Cast to Google Home-Sonos",
-                                        "tap_action": false,
-                                        "hide": {
-                                            "power": true,
-                                            "play_pause": true,
-                                            "icon": true
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "media_player.owntone_output_living_room_gh",
-                                            "state": "on"
-                                        }
-                                    ],
-                                    "card": {
-                                        "type": "custom:mini-media-player",
-                                        "entity": "media_player.owntone_output_living_room_gh",
-                                        "name": "Cast to Google Home-Livingroom",
-                                        "tap_action": false,
-                                        "hide": {
-                                            "power": true,
-                                            "play_pause": true,
-                                            "icon": true
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "conditional",
-                                    "conditions": [
-                                        {
-                                            "entity": "media_player.owntone_output_home_group",
-                                            "state": "on"
-                                        }
-                                    ],
-                                    "card": {
-                                        "type": "custom:mini-media-player",
-                                        "entity": "media_player.owntone_output_home_group",
-                                        "name": "Cast to Google Home-Group",
+                                        "entity": "media_player.owntone01_output_bedroom_speaker",
+                                        "name": "Cast to Google Home-Bedroom",
                                         "tap_action": false,
                                         "hide": {
                                             "power": true,

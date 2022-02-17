@@ -28,6 +28,10 @@
             {
                 "name": "owntone-shuffle",
                 "id": "owntone_shuffle"
+            },
+            {
+                "name": "owntone01-shuffle",
+                "id": "owntone01_shuffle"
             }
         ]
     }

@@ -5,9 +5,6 @@
 !.gitignore
 !*.md
 !conf/
-!.storage/lovelace.lovelace_dashboard1
-!.storage/lovelace.lovelace_dashboard2
-!.storage/lovelace.lovelace_main
 !images/
 
 # File ignores

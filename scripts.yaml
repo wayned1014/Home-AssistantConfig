@@ -185,7 +185,6 @@ owntone_power_off:
       entity_id:
       - media_player.owntone_output_living_room_sonos
       - media_player.owntone_output_living_room_gh
-      - media_player.owntone_output_bedroom_speaker
   - service: media_player.select_source
     data:
       source: TV
@@ -193,3 +192,43 @@ owntone_power_off:
       entity_id: media_player.sonos_arc_2
   mode: single
   alias: OwnTone-Power_Off
+owntone01_play_playlist:
+  alias: OwnTone01-Play Playlist
+  sequence:
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.owntone01_server
+    data:
+      source: '{{ playlist }}'
+  - service: media_player.media_play
+    data: {}
+    target:
+      entity_id: media_player.owntone01_server
+  mode: single
+owntone01_shuffle:
+  alias: OwnTone01-Shuffle
+  sequence:
+  - service: input_boolean.toggle
+    target:
+      entity_id:
+      - input_boolean.owntone01_shuffle
+    data: {}
+  - service: media_player.shuffle_set
+    target:
+      entity_id: media_player.owntone01_server
+    data:
+      shuffle: '{{ states.input_boolean.owntone01_shuffle.state }}'
+  mode: single
+owntone01_power_off:
+  alias: OwnTone01-Power_Off
+  sequence:
+  - service: media_player.clear_playlist
+    data: {}
+    target:
+      entity_id: media_player.owntone01_server
+  - service: media_player.turn_off
+    data: {}
+    target:
+      entity_id:
+      - media_player.owntone_output_bedroom_speaker
+  mode: single
