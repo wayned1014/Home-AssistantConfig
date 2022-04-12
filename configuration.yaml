@@ -5,7 +5,7 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
-    base_url: http://192.168.0.238:8123
+    base_url: https://192.168.0.238:8123
 
 opnsense:
   url: https://opnsense.localdomain/api
@@ -60,12 +60,6 @@ rest_command: !include_dir_merge_named conf/rest_command/
 #    zone: 12
 #    county: 23
   
-camera:
-  - platform: generic
-    name: House_Front
-    still_image_url: !secret camera_still_image_url
-    stream_source: !secret camera_stream_source
-
 logbook:
   exclude:
     entities:

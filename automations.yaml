@@ -65,3 +65,41 @@
     target:
       entity_id: media_player.owntone_output_home_group
   mode: single
+- id: '1646450453527'
+  alias: Eufy - Display image on TV
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.doorbell_ringing_sensor
+    to: 'True'
+    from: 'False'
+  condition: []
+  action:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/images/doorbell.png
+    target:
+      device_id: 5bf9fd8da629f452bccc126bad2e538d
+  - service: notify.android_tv_fire_tv
+    data:
+      title: Front Doorbell
+      data:
+        position: top-right
+        image:
+          path: /config/www/images/doorbell.png
+      message: Doorbell
+  mode: single
+- id: '1647999023211'
+  alias: Watchtower
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: 21582bf2-7327-45e7-9a0b-04a33d7c43d2-8dd5245e-42a8-4e15-9884-b3bade86ecce
+  condition: []
+  action:
+  - service: input_text.set_value
+    data:
+      value: '{{ trigger.data }}'
+    target:
+      entity_id: input_text.watchtower
+  mode: single

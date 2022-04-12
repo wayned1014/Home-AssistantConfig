@@ -299,13 +299,20 @@
                                         "buttons": {
                                             "card": {
                                                 "type": "grid",
-                                                "columns": 9,
+                                                "columns": 4,
                                                 "square": false,
                                                 "cards": [
                                                     {
                                                         "type": "custom:button-card",
                                                         "name": "Previous Track",
                                                         "icon": "mdi:skip-backward",
+                                                        "styles": {
+                                                            "card": [
+                                                                {
+                                                                    "height": "100px"
+                                                                }
+                                                            ]
+                                                        },
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "media_player.media_previous_track",
@@ -318,6 +325,13 @@
                                                         "type": "custom:button-card",
                                                         "name": "Next Track",
                                                         "icon": "mdi:skip-forward",
+                                                        "styles": {
+                                                            "card": [
+                                                                {
+                                                                    "height": "100px"
+                                                                }
+                                                            ]
+                                                        },
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "media_player.media_next_track",
@@ -330,6 +344,13 @@
                                                         "type": "custom:button-card",
                                                         "name": "Play/Pause",
                                                         "entity": "media_player.owntone01_server",
+                                                        "styles": {
+                                                            "card": [
+                                                                {
+                                                                    "height": "100px"
+                                                                }
+                                                            ]
+                                                        },
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "media_player.media_play_pause",
@@ -355,6 +376,13 @@
                                                         "entity": "input_boolean.owntone01_shuffle",
                                                         "name": "Shuffle",
                                                         "icon": "mdi:shuffle-variant",
+                                                        "styles": {
+                                                            "card": [
+                                                                {
+                                                                    "height": "100px"
+                                                                }
+                                                            ]
+                                                        },
                                                         "tap_action": {
                                                             "action": "call-service",
                                                             "service": "script.owntone01_shuffle"
@@ -423,7 +451,7 @@
                                         "buttons": {
                                             "card": {
                                                 "type": "grid",
-                                                "columns": 9,
+                                                "columns": 4,
                                                 "square": false,
                                                 "styles": {
                                                     "label": [
@@ -448,6 +476,13 @@
                                                         },
                                                         "name": "Bedroom",
                                                         "icon": "mdi:google-home",
+                                                        "styles": {
+                                                            "card": [
+                                                                {
+                                                                    "height": "100px"
+                                                                }
+                                                            ]
+                                                        },
                                                         "state": [
                                                             {
                                                                 "operator": "==",

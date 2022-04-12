@@ -152,6 +152,128 @@
                             }
                         ]
                     }
+                },
+                "ceiling-fan-icon-settings": {
+                    "show_icon": true,
+                    "show_label": false,
+                    "show_name": false,
+                    "styles": {
+                        "card": [
+                            {
+                                "height": "36px"
+                            },
+                            {
+                                "width": "50px"
+                            }
+                        ],
+                        "grid": [
+                            {
+                                "grid-template-areas": "\"i\""
+                            },
+                            {
+                                "grid-template-columnns": "auto"
+                            }
+                        ],
+                        "icon": [
+                            {
+                                "height": "35px"
+                            },
+                            {
+                                "width": "35px"
+                            }
+                        ]
+                    },
+                    "state": [
+                        {
+                            "value": "on",
+                            "spin": true
+                        }
+                    ]
+                },
+                "ceiling-fan-name-settings": {
+                    "show_icon": false,
+                    "show_label": false,
+                    "show_name": true,
+                    "styles": {
+                        "card": [
+                            {
+                                "height": "36px"
+                            }
+                        ],
+                        "grid": [
+                            {
+                                "grid-template-areas": "\"n\""
+                            },
+                            {
+                                "grid-template-columnns": "auto"
+                            }
+                        ],
+                        "name": [
+                            {
+                                "justify-self": "start"
+                            }
+                        ]
+                    }
+                },
+                "fan-speed-settings": {
+                    "show_icon": false,
+                    "show_name": true,
+                    "styles": {
+                        "card": [
+                            {
+                                "height": "35px"
+                            },
+                            {
+                                "font-size": "12px"
+                            },
+                            {
+                                "width": "105px"
+                            },
+                            {
+                                "border": "2px solid white"
+                            },
+                            {
+                                "border-radius": "12px"
+                            },
+                            {
+                                "text-transform": "uppercase"
+                            },
+                            {
+                                "background-color": "var(ha-card-background)"
+                            }
+                        ],
+                        "icon": [
+                            {
+                                "icon-size": "14px"
+                            }
+                        ]
+                    }
+                },
+                "vertical-divider-grey": {
+                    "color_type": "blank-card",
+                    "styles": {
+                        "card": [
+                            {
+                                "width": "3px"
+                            },
+                            {
+                                "color": "var(--primary-color)"
+                            }
+                        ]
+                    }
+                },
+                "horizontal-divider-grey": {
+                    "color_type": "blank-card",
+                    "styles": {
+                        "card": [
+                            {
+                                "height": "3px"
+                            },
+                            {
+                                "background-color": "var(ha-card-background)"
+                            }
+                        ]
+                    }
                 }
             },
             "title": "Home",
@@ -378,275 +500,131 @@
                         {
                             "type": "custom:stack-in-card",
                             "mode": "vertical",
+                            "title": "Living Room Fan",
                             "cards": [
                                 {
                                     "type": "custom:button-card",
-                                    "entity": "fan.in_wall_smart_fan_control",
-                                    "name": "Livingroom Fan",
-                                    "show_icon": true,
-                                    "styles": {
-                                        "icon": [
-                                            {
-                                                "height": "40px"
-                                            },
-                                            {
-                                                "width": "40px"
-                                            }
-                                        ]
-                                    },
-                                    "label": "[[[\n let name = states['fan.in_wall_smart_fan_control'].attributes.speed\n return name.charAt(0).toUpperCase() + name.slice(1)\n]]]\n",
-                                    "show_label": true,
-                                    "state": [
-                                        {
-                                            "value": "on",
-                                            "icon": "mdi:fan",
-                                            "spin": true
-                                        },
-                                        {
-                                            "value": "off",
-                                            "icon": "mdi:fan"
-                                        }
-                                    ]
+                                    "template": "horizontal-divider-grey"
                                 },
                                 {
                                     "type": "horizontal-stack",
                                     "cards": [
                                         {
                                             "type": "custom:button-card",
-                                            "template": "container",
-                                            "color": "var(--paper-card-background-color)",
+                                            "template": "ceiling-fan-icon-settings",
+                                            "entity": "fan.in_wall_smart_fan_control",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.toggle",
+                                                "service_data": {
+                                                    "entity_id": "fan.in_wall_smart_fan_control"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "low",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.in_wall_smart_fan_control",
+                                                    "percentage": 33
+                                                }
+                                            },
                                             "styles": {
                                                 "card": [
                                                     {
-                                                        "--paper-card-background-color": "rgba(0, 0, 0, 0.3)"
-                                                    },
-                                                    {
-                                                        "color": "white"
+                                                        "background-color": "[[[\n  if ((states['fan.in_wall_smart_fan_control'].attributes.percentage == '33') & (states['fan.in_wall_smart_fan_control'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
                                                     }
-                                                ],
-                                                "custom_fields": {
-                                                    "buttons": [
-                                                        {
-                                                            "background-color": "rgba(0,0,0,0.0)"
-                                                        },
-                                                        {
-                                                            "margin": 0
-                                                        },
-                                                        {
-                                                            "padding": "0.3em"
-                                                        }
-                                                    ]
-                                                }
-                                            },
-                                            "custom_fields": {
-                                                "buttons": {
-                                                    "card": {
-                                                        "type": "grid",
-                                                        "columns": 4,
-                                                        "square": false,
-                                                        "cards": [
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Off",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.turn_off",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.in_wall_smart_fan_control"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Low",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.in_wall_smart_fan_control",
-                                                                        "speed": "low"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Medium",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.in_wall_smart_fan_control",
-                                                                        "speed": "medium"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "High",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.in_wall_smart_fan_control",
-                                                                        "speed": "high"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            }
-                                                        ]
-                                                    }
-                                                }
+                                                ]
                                             }
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:stack-in-card",
-                            "mode": "vertical",
-                            "cards": [
-                                {
-                                    "type": "custom:button-card",
-                                    "entity": "fan.bedroom_fan_current_value",
-                                    "show_icon": true,
-                                    "styles": {
-                                        "icon": [
-                                            {
-                                                "height": "40px"
-                                            },
-                                            {
-                                                "width": "40px"
-                                            }
-                                        ]
-                                    },
-                                    "label": "[[[\n let name = states['fan.bedroom_fan_current_value'].attributes.speed\n return name.charAt(0).toUpperCase() + name.slice(1)\n]]]\n",
-                                    "show_label": true,
-                                    "state": [
-                                        {
-                                            "value": "on",
-                                            "icon": "mdi:fan",
-                                            "spin": true
                                         },
                                         {
-                                            "value": "off",
-                                            "icon": "mdi:fan"
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "med",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.in_wall_smart_fan_control",
+                                                    "percentage": 67
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if ((states['fan.in_wall_smart_fan_control'].attributes.percentage == '67') & (states['fan.in_wall_smart_fan_control'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "high",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.in_wall_smart_fan_control",
+                                                    "percentage": 100
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if ((states['fan.in_wall_smart_fan_control'].attributes.percentage == '100') & (states['fan.in_wall_smart_fan_control'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "off",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.turn_off",
+                                                "service_data": {
+                                                    "entity_id": "fan.in_wall_smart_fan_control"
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if (states['fan.in_wall_smart_fan_control'].state === 'off') \n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "custom:button-card",
-                                            "template": "container",
-                                            "color": "var(--paper-card-background-color)",
-                                            "styles": {
-                                                "card": [
-                                                    {
-                                                        "--paper-card-background-color": "rgba(0, 0, 0, 0.3)"
-                                                    },
-                                                    {
-                                                        "color": "white"
-                                                    }
-                                                ],
-                                                "custom_fields": {
-                                                    "buttons": [
-                                                        {
-                                                            "background-color": "rgba(0,0,0,0.0)"
-                                                        },
-                                                        {
-                                                            "margin": 0
-                                                        },
-                                                        {
-                                                            "padding": "0.3em"
-                                                        }
-                                                    ]
-                                                }
-                                            },
-                                            "custom_fields": {
-                                                "buttons": {
-                                                    "card": {
-                                                        "type": "grid",
-                                                        "columns": 4,
-                                                        "square": false,
-                                                        "cards": [
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Off",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.turn_off",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.bedroom_fan_current_value"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Low",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.bedroom_fan_current_value",
-                                                                        "speed": "low"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "Medium",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.bedroom_fan_current_value",
-                                                                        "speed": "medium"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            },
-                                                            {
-                                                                "type": "custom:button-card",
-                                                                "label": "High",
-                                                                "show_label": true,
-                                                                "show_name": false,
-                                                                "tap_action": {
-                                                                    "action": "call-service",
-                                                                    "service": "fan.set_speed",
-                                                                    "service_data": {
-                                                                        "entity_id": "fan.bedroom_fan_current_value",
-                                                                        "speed": "high"
-                                                                    }
-                                                                },
-                                                                "color": "rgb(66, 134, 244)"
-                                                            }
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    ]
+                                    "type": "custom:button-card",
+                                    "template": "horizontal-divider-grey"
                                 }
                             ]
                         },
@@ -988,6 +966,137 @@
                             "title": "Livingroom Light"
                         },
                         {
+                            "type": "custom:stack-in-card",
+                            "mode": "vertical",
+                            "title": "Bedroom Fan",
+                            "cards": [
+                                {
+                                    "type": "custom:button-card",
+                                    "template": "horizontal-divider-grey"
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "ceiling-fan-icon-settings",
+                                            "entity": "fan.bedroom_fan_current_value",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.toggle",
+                                                "service_data": {
+                                                    "entity_id": "fan.bedroom_fan_current_value"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "low",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.bedroom_fan_current_value",
+                                                    "percentage": 33
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if ((states['fan.bedroom_fan_current_value'].attributes.percentage == '33') & (states['fan.bedroom_fan_current_value'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "med",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.bedroom_fan_current_value",
+                                                    "percentage": 67
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if ((states['fan.bedroom_fan_current_value'].attributes.percentage == '67') & (states['fan.bedroom_fan_current_value'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "high",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.set_percentage",
+                                                "service_data": {
+                                                    "entity_id": "fan.bedroom_fan_current_value",
+                                                    "percentage": 100
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if ((states['fan.bedroom_fan_current_value'].attributes.percentage == '100') & (states['fan.bedroom_fan_current_value'].state === 'on'))\n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "fan-speed-settings",
+                                            "name": "off",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "fan.turn_off",
+                                                "service_data": {
+                                                    "entity_id": "fan.bedroom_fan_current_value"
+                                                }
+                                            },
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "background-color": "[[[\n  if (states['fan.bedroom_fan_current_value'].state === 'off') \n    return \"#2980b9\";\n  return \"grey\";\n]]]\n"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "custom:button-card",
+                                            "template": "vertical-divider-grey"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:button-card",
+                                    "template": "horizontal-divider-grey"
+                                }
+                            ]
+                        },
+                        {
                             "type": "entities",
                             "entities": [
                                 {
@@ -1028,6 +1137,10 @@
                                     "type": "entities",
                                     "entities": [
                                         {
+                                            "entity": "lock.touchscreen_deadbolt_current_lock_mode"
+                                        },
+                                        {
+                                            "type": "custom:only-lock-lock-row",
                                             "entity": "lock.touchscreen_deadbolt_current_lock_mode"
                                         }
                                     ]
@@ -1091,7 +1204,9 @@
                                 {
                                     "type": "entities",
                                     "entities": [
-                                        "switch.tasmota"
+                                        {
+                                            "entity": "switch.plug_01_relay"
+                                        }
                                     ]
                                 },
                                 {
@@ -1101,15 +1216,12 @@
                                         "label": "Data"
                                     },
                                     "entities": [
-                                        "sensor.tasmota_energy_apparentpower",
-                                        "sensor.tasmota_energy_current",
-                                        "sensor.tasmota_energy_factor",
-                                        "sensor.tasmota_energy_power",
-                                        "sensor.tasmota_energy_reactivepower",
-                                        "sensor.tasmota_energy_today",
-                                        "sensor.tasmota_energy_total",
-                                        "sensor.tasmota_energy_voltage",
-                                        "sensor.tasmota_energy_yesterday"
+                                        "binary_sensor.plug_01_button",
+                                        "binary_sensor.plug_01_status",
+                                        "sensor.plug_01_current",
+                                        "sensor.plug_01_power",
+                                        "sensor.plug_01_voltage",
+                                        "sensor.plug_01_wifi_signal"
                                     ]
                                 }
                             ]
@@ -1252,7 +1364,11 @@
                         },
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.frigate_front"
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.frigate_front"
+                                }
+                            ]
                         },
                         {
                             "type": "conditional",
@@ -1478,6 +1594,12 @@
                             "type": "custom:sun-card",
                             "showAzimuth": true,
                             "showElevation": true
+                        },
+                        {
+                            "type": "custom:googletimers-card",
+                            "entity": "sensor.living_room_google_home_timers",
+                            "alarms_entity": "sensor.living_room_google_home_alarms",
+                            "title": "Kitchen"
                         }
                     ]
                 },

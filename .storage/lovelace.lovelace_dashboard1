@@ -164,10 +164,10 @@
                     "show_icon": true,
                     "tap_action": {
                         "action": "call-service",
-                        "service": "fan.set_speed",
+                        "service": "fan.set_percentage",
                         "service_data": {
                             "entity_id": "entity",
-                            "speed": "[[[ return variables.set_value ]]]"
+                            "percentage": "[[[ return variables.set_value ]]]"
                         }
                     },
                     "state": [
@@ -189,7 +189,7 @@
                             "operator": "template",
                             "spin": true,
                             "icon": "mdi:fan",
-                            "value": "[[[ return entity.attributes.speed === variables.set_value ]]]",
+                            "value": "[[[ return entity.attributes.percentage === variables.set_value ]]]",
                             "styles": {
                                 "card": [
                                     {
@@ -229,7 +229,7 @@
                         },
                         {
                             "operator": "template",
-                            "value": "[[[ return (entity.attributes.brightness||0) >= variables.range_start && (entity.attributes.brightness||0) <= variables.range_stop ]]]",
+                            "value": "[[[ return (entity.attributes.brightness||0) >= variables.range_start*2.56 && (entity.attributes.brightness||0) <= variables.range_stop*2.56 ]]]",
                             "styles": {
                                 "card": [
                                     {
@@ -310,19 +310,19 @@
                         "option_button_off_color": "var(--paper-card-background-color)",
                         "option_text_off_color": "white",
                         "option1_name": "Low",
-                        "option1_set_value": "low",
+                        "option1_set_value": 33,
                         "option1_range_start": 1,
-                        "option1_range_stop": 77,
+                        "option1_range_stop": 33,
                         "option2_name": "Medium",
-                        "option2_set_value": "medium",
-                        "option2_range_start": 78,
-                        "option2_range_stop": 170,
+                        "option2_set_value": 67,
+                        "option2_range_start": 34,
+                        "option2_range_stop": 67,
                         "option3_name": "High",
-                        "option3_set_value": "high",
-                        "option3_range_start": 171,
-                        "option3_range_stop": 255,
+                        "option3_set_value": 100,
+                        "option3_range_start": 68,
+                        "option3_range_stop": 100,
                         "option4_name": "Off",
-                        "option4_set_value": "off",
+                        "option4_set_value": 0,
                         "option4_range_start": 0,
                         "option4_range_stop": 0
                     },
@@ -330,8 +330,8 @@
                         "opt1": {
                             "card": {
                                 "type": "custom:button-card",
-                                "show_icon": "[[[ return entity.attributes.speed === \"low\" ]]]",
-                                "show_name": "[[[ return entity.attributes.speed != \"low\" ]]]",
+                                "show_icon": false,
+                                "show_name": true,
                                 "entity": "[[[ return variables.entity ]]]",
                                 "template": "[[[ return variables.option_template ]]]",
                                 "name": "[[[ return variables.option1_name ]]]",
@@ -349,8 +349,8 @@
                         "opt2": {
                             "card": {
                                 "type": "custom:button-card",
-                                "show_icon": "[[[ return entity.attributes.speed === \"medium\" ]]]",
-                                "show_name": "[[[ return entity.attributes.speed != \"medium\" ]]]",
+                                "show_icon": false,
+                                "show_name": true,
                                 "entity": "[[[ return variables.entity ]]]",
                                 "template": "[[[ return variables.option_template ]]]",
                                 "name": "[[[ return variables.option2_name ]]]",
@@ -368,8 +368,8 @@
                         "opt3": {
                             "card": {
                                 "type": "custom:button-card",
-                                "show_icon": "[[[ return entity.attributes.speed === \"high\" ]]]",
-                                "show_name": "[[[ return entity.attributes.speed != \"high\" ]]]",
+                                "show_icon": false,
+                                "show_name": true,
                                 "entity": "[[[ return variables.entity ]]]",
                                 "template": "[[[ return variables.option_template ]]]",
                                 "name": "[[[ return variables.option3_name ]]]",
@@ -629,13 +629,13 @@
                                 "option_template": "fan-option",
                                 "option_button_on_color": "rgb(120,120,120)",
                                 "option1_name": "Low",
-                                "option1_set_value": "low",
+                                "option1_set_value": 33,
                                 "option2_name": "Medium",
-                                "option2_set_value": "medium",
+                                "option2_set_value": 67,
                                 "option3_name": "High",
-                                "option3_set_value": "high",
+                                "option3_set_value": 100,
                                 "option4_name": "Off",
-                                "option4_set_value": "off"
+                                "option4_set_value": 0
                             }
                         },
                         {
@@ -667,13 +667,13 @@
                                 "option_template": "fan-option",
                                 "option_button_on_color": "rgb(120,120,120)",
                                 "option1_name": "Low",
-                                "option1_set_value": "low",
+                                "option1_set_value": 33,
                                 "option2_name": "Medium",
-                                "option2_set_value": "medium",
+                                "option2_set_value": 67,
                                 "option3_name": "High",
-                                "option3_set_value": "high",
+                                "option3_set_value": 100,
                                 "option4_name": "Off",
-                                "option4_set_value": "off"
+                                "option4_set_value": 0
                             }
                         }
                     ]

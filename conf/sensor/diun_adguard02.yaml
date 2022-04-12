@@ -1,0 +1,5 @@
+- platform: mqtt
+  name: diun_adguard02
+  state_topic: docker/adguard02
+  value_template: "{{ value_json.status }}"
+  json_attributes_topic: docker/adguard02

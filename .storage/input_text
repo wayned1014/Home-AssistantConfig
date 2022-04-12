@@ -17,6 +17,20 @@
                 "mode": "text",
                 "max": 100,
                 "id": "sonos_trigger_text"
+            },
+            {
+                "name": "owntone-playlist_playing",
+                "max": 100,
+                "mode": "text",
+                "min": 0,
+                "id": "owntone_playlist_playing"
+            },
+            {
+                "name": "watchtower",
+                "max": 500,
+                "min": 0,
+                "mode": "text",
+                "id": "watchtower"
             }
         ]
     }

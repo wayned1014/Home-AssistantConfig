@@ -1,8 +1,18 @@
 {
     "version": 1,
-    "minor_version": 1,
+    "minor_version": 2,
     "key": "input_select",
     "data": {
-        "items": []
+        "items": [
+            {
+                "name": "A_Music",
+                "icon": "mdi:music",
+                "options": [
+                    "Gary US Bonds",
+                    "Soul Cruisers"
+                ],
+                "id": "a_music"
+            }
+        ]
     }
 }
