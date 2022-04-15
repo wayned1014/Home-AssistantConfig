@@ -1,0 +1,33 @@
+- platform: template
+  fans:
+    bedroom_fan:
+      unique_id: bedroom_fan
+      friendly_name: "Bedroom Fan"
+      value_template: >
+        {{ states('fan.bedroom_fan_current_value') }}
+      preset_mode_template: >
+        {%- set v = state_attr('fan.bedroom_fan_current_value', 'percentage') | int(0) -%}
+        {%- set vals = { 0: 'off', 33: 'low', 67: 'medium', 100: 'high' } -%}
+        {{ vals[v] }}
+      turn_on:
+        service: fan.turn_on
+        target:
+          entity_id: fan.bedroom_fan_current_value
+      turn_off:
+        service: fan.turn_off
+        target:
+          entity_id: fan.bedroom_fan_current_value
+      set_preset_mode:
+        service: fan.set_percentage
+        data:
+          percentage: >
+            {%- set vals = { 'off': 0, 'low': 33, 'medium': 67, 'high': 100 } -%}
+            {{ vals[preset_mode]}}
+        target:
+          entity_id: fan.bedroom_fan_current_value
+      speed_count: 3
+      preset_modes:
+        - "off"
+        - "low"
+        - "medium"
+        - "high"

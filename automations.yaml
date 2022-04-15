@@ -103,3 +103,32 @@
     target:
       entity_id: input_text.watchtower
   mode: single
+- id: '1649894408085'
+  alias: UPS Power Outage
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.apc_nut_status_data
+    from:
+    - OL
+    - OL CHRG
+    to: OB DISCHRG
+  condition: []
+  action:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Power failure detected
+      title: POWER OUTAGE
+  mode: single
+- id: '1649984738410'
+  alias: GE Switch Double Taps
+  description: ''
+  use_blueprint:
+    path: kpine/ge_double.yaml
+    input:
+      device: f39d82088737706acb0961912b26b0e3
+      double_tap_on:
+      - device_id: 6ee3872cf9317fe13bf397782a44f7cd
+        domain: fan
+        entity_id: fan.in_wall_smart_fan_control
+        type: turn_off

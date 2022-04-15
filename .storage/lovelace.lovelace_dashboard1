@@ -605,6 +605,12 @@
                             "type": "custom:button-card",
                             "template": "presets",
                             "name": "Living Room",
+                            "state": [
+                                {
+                                    "value": "on",
+                                    "icon": "mdi:lightbulb-on"
+                                }
+                            ],
                             "variables": {
                                 "entity": "light.12724_3_way_dimmer_switch_level",
                                 "option_template": "dimmer-option",
@@ -624,6 +630,12 @@
                             "type": "custom:button-card",
                             "template": "presets",
                             "name": "Living Room",
+                            "state": [
+                                {
+                                    "value": "on",
+                                    "spin": true
+                                }
+                            ],
                             "variables": {
                                 "entity": "fan.in_wall_smart_fan_control",
                                 "option_template": "fan-option",
@@ -643,6 +655,12 @@
                             "type": "custom:button-card",
                             "template": "presets",
                             "name": "Bedroom",
+                            "state": [
+                                {
+                                    "value": "on",
+                                    "icon": "mdi:lightbulb-on"
+                                }
+                            ],
                             "variables": {
                                 "entity": "light.14294_in_wall_smart_dimmer_level",
                                 "option_template": "dimmer-option",
@@ -662,6 +680,12 @@
                             "type": "custom:button-card",
                             "template": "presets",
                             "name": "Bedroom",
+                            "state": [
+                                {
+                                    "value": "on",
+                                    "spin": true
+                                }
+                            ],
                             "variables": {
                                 "entity": "fan.bedroom_fan_current_value",
                                 "option_template": "fan-option",
