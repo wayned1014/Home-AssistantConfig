@@ -1,5 +1,4 @@
-- platform: mqtt
-  name: diun_owntone
+- name: diun_owntone
   state_topic: docker/owntone
   value_template: "{{ value_json.status }}"
   json_attributes_topic: docker/owntone

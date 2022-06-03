@@ -701,7 +701,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_today",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -712,7 +711,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_today",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },
@@ -732,7 +730,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_yesterday",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -748,7 +745,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_yesterday",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },
@@ -778,7 +774,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_thisweek",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -794,7 +789,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_thisweek",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },
@@ -824,7 +818,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_lastweek",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -840,7 +833,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_lastweek",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },
@@ -870,7 +862,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_this_month",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -886,7 +877,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_this_month",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },
@@ -916,7 +906,6 @@
                                                     "entities": [
                                                         {
                                                             "entity": "sensor.heat_on_time_last_month",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Heat On Time"
                                                         },
@@ -932,7 +921,6 @@
                                                         },
                                                         {
                                                             "entity": "sensor.cool_on_time_last_month",
-                                                            "type": "attribute",
                                                             "attribute": "value",
                                                             "name": "Cool On Time"
                                                         },

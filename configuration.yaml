@@ -5,7 +5,7 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
-    base_url: https://192.168.0.238:8123
+#    base_url: https://192.168.0.238:8123
 
 opnsense:
   url: https://opnsense.localdomain/api
@@ -47,6 +47,9 @@ rest: !include_dir_merge_list conf/rest/
 switch: !include_dir_merge_list conf/switch/
 rest_command: !include_dir_merge_named conf/rest_command/
 fan: !include_dir_merge_list conf/fan/
+
+mqtt:
+  sensor: !include_dir_merge_list conf/mqtt/
 
 #shell_command:
 #  owntone_sonos_on: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/79880900644729" --data "{\"selected\":true, \"volume\": 10}"'
