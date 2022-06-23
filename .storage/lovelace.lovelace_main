@@ -563,22 +563,43 @@
                                     "state_header": "Size"
                                 },
                                 {
-                                    "entity": "sensor.esxi_vmhost_esxi_01_localdomain",
+                                    "entity": "sensor.esxi_vmhost_192_168_0_241",
                                     "attribute": "cpuusage_ghz",
                                     "unit": "GHz",
-                                    "name": "ESXi Server",
+                                    "name": "ESXi-01 Server",
                                     "icon": "mdi:database",
                                     "type": "custom:multiple-entity-row",
                                     "entities": [
                                         {
-                                            "entity": "sensor.esxi_vmhost_esxi_01_localdomain",
+                                            "entity": "sensor.esxi_vmhost_192_168_0_241",
                                             "attribute": "memusage_gb",
                                             "name": "Mem Usage",
                                             "unit": "GB"
                                         }
                                     ],
                                     "secondary_info": {
-                                        "entity": "sensor.esxi_uptime",
+                                        "entity": "sensor.esxi_01_uptime",
+                                        "name": false
+                                    },
+                                    "state_header": "CPU Usage"
+                                },
+                                {
+                                    "entity": "sensor.esxi_vmhost_192_168_0_252",
+                                    "attribute": "cpuusage_ghz",
+                                    "unit": "GHz",
+                                    "name": "ESXi-02 Server",
+                                    "icon": "mdi:database",
+                                    "type": "custom:multiple-entity-row",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.esxi_vmhost_192_168_0_252",
+                                            "attribute": "memusage_gb",
+                                            "name": "Mem Usage",
+                                            "unit": "GB"
+                                        }
+                                    ],
+                                    "secondary_info": {
+                                        "entity": "sensor.esxi_02_uptime",
                                         "name": false
                                     },
                                     "state_header": "CPU Usage"
@@ -992,7 +1013,8 @@
                                         },
                                         {
                                             "type": "custom:only-lock-lock-row",
-                                            "entity": "lock.touchscreen_deadbolt_current_lock_mode"
+                                            "entity": "lock.touchscreen_deadbolt_current_lock_mode",
+                                            "name": "Lock Only"
                                         }
                                     ]
                                 }
@@ -1036,11 +1058,11 @@
                                     "type": "entities",
                                     "entities": [
                                         {
-                                            "entity": "sensor.adguard_dns_queries",
+                                            "entity": "sensor.adguard_dns_queries_total",
                                             "name": "DNS Queries"
                                         },
                                         {
-                                            "entity": "sensor.adguard_dns_queries_blocked",
+                                            "entity": "sensor.adguard_dns_queries_blocked_total",
                                             "name": "DNS Queries Blocked"
                                         }
                                     ],
@@ -1048,7 +1070,7 @@
                                 },
                                 {
                                     "type": "gauge",
-                                    "entity": "sensor.adguard_dns_queries_blocked_ratio",
+                                    "entity": "sensor.adguard_dns_queries_blocked_total_ratio",
                                     "card_mod": {
                                         "style": ":host {\n --label-badge-blue: {% if is_state('switch.adguard_protection', 'on') %} green {% else %} red {% endif %}\n }\n"
                                     },
@@ -1267,6 +1289,60 @@
                                 "type": "custom:webrtc-camera",
                                 "entity": "camera.doorbell"
                             }
+                        },
+                        {
+                            "type": "custom:stack-in-card",
+                            "cards": [
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.rahway_carbon_monoxide_co"
+                                        },
+                                        {
+                                            "entity": "sensor.rahway_sulphur_dioxide_so2"
+                                        }
+                                    ],
+                                    "title": "Air Quality Data - Rahway, NJ"
+                                },
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.rahway_air_quality_index",
+                                    "name": "Air Quality Index",
+                                    "card_mod": {
+                                        "style": ":host {\n --label-badge-blue: {% if is_state('switch.adguard_protection', 'on') %} green {% else %} red {% endif %}\n }\n"
+                                    },
+                                    "min": 0,
+                                    "max": 310,
+                                    "needle": true,
+                                    "segments": [
+                                        {
+                                            "from": 0,
+                                            "color": "#009966"
+                                        },
+                                        {
+                                            "from": 51,
+                                            "color": "#ffde33"
+                                        },
+                                        {
+                                            "from": 101,
+                                            "color": "#ff9933"
+                                        },
+                                        {
+                                            "from": 151,
+                                            "color": "#cc0033"
+                                        },
+                                        {
+                                            "from": 201,
+                                            "color": "#660099"
+                                        },
+                                        {
+                                            "from": 300,
+                                            "color": "#7e0023"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "id": "nuc_status",
@@ -2765,9 +2841,9 @@
                     ]
                 },
                 {
-                    "title": "ESXi Stats",
-                    "type": "panel",
                     "theme": "kibibit",
+                    "title": "vCenter Stats",
+                    "type": "panel",
                     "badges": [],
                     "cards": [
                         {
@@ -2776,7 +2852,8 @@
                                 {
                                     "type": "custom:flex-table-card",
                                     "title": "ESXi Hosts",
-                                    "clickable": true,
+                                    "clickable": false,
+                                    "sort_by": "name+",
                                     "entities": {
                                         "include": "sensor.esxi_vmhost*"
                                     },
@@ -2810,7 +2887,8 @@
                                 {
                                     "type": "custom:flex-table-card",
                                     "title": "ESXi Virtual Machines",
-                                    "clickable": true,
+                                    "clickable": false,
+                                    "sort_by": "name",
                                     "entities": {
                                         "include": "sensor.esxi_vm_*"
                                     },
@@ -2856,8 +2934,8 @@
                                             "data": "used_space_gb"
                                         },
                                         {
-                                            "name": "VM Tools",
-                                            "data": "tools_status"
+                                            "name": "Host",
+                                            "data": "host_name"
                                         },
                                         {
                                             "name": "Snapshots",
@@ -2868,9 +2946,308 @@
                                 {
                                     "type": "custom:flex-table-card",
                                     "title": "ESXi Datastores",
-                                    "clickable": true,
+                                    "clickable": false,
+                                    "sort_by": "name",
                                     "entities": {
                                         "include": "sensor.esxi_datastore*"
+                                    },
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "data": "name"
+                                        },
+                                        {
+                                            "name": "Free Space (GB)",
+                                            "data": "free_space_gb"
+                                        },
+                                        {
+                                            "name": "Capacity (GB)",
+                                            "data": "total_space_gb"
+                                        },
+                                        {
+                                            "name": "Hosts",
+                                            "data": "connected_hosts"
+                                        },
+                                        {
+                                            "name": "VMs",
+                                            "data": "virtual_machines"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "data": "type"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "theme": "kibibit",
+                    "title": "ESXi-01 Stats",
+                    "path": "esxi-01-stats",
+                    "type": "panel",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "custom:flex-table-card",
+                                    "title": "ESXi-01 Hosts",
+                                    "clickable": false,
+                                    "sort_by": "name+",
+                                    "entities": {
+                                        "include": "sensor.esxi_vmhost_192.168.0.241"
+                                    },
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "data": "name"
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "data": "version"
+                                        },
+                                        {
+                                            "name": "Uptime (H)",
+                                            "data": "uptime_hours"
+                                        },
+                                        {
+                                            "name": "CPU Use (GHz)",
+                                            "data": "cpuusage_ghz"
+                                        },
+                                        {
+                                            "name": "Mem Use (GB)",
+                                            "data": "memusage_gb"
+                                        },
+                                        {
+                                            "name": "VMs",
+                                            "data": "vms"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:auto-entities",
+                                    "filter": {
+                                        "include": [
+                                            {
+                                                "entity_id": "sensor.esxi_vm_*",
+                                                "attributes": {
+                                                    "host_name": "192.168.0.241"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "card": {
+                                        "type": "custom:flex-table-card",
+                                        "title": "ESXi-01 Virtual Machines",
+                                        "clickable": false,
+                                        "sort_by": "name",
+                                        "columns": [
+                                            {
+                                                "name": "Name",
+                                                "data": "name"
+                                            },
+                                            {
+                                                "name": "Status",
+                                                "data": "status"
+                                            },
+                                            {
+                                                "name": "State",
+                                                "data": "state"
+                                            },
+                                            {
+                                                "name": "Uptime (H)",
+                                                "data": "uptime_hours"
+                                            },
+                                            {
+                                                "name": "IP Addr",
+                                                "data": "guest_ip"
+                                            },
+                                            {
+                                                "name": "CPU Usage (%)",
+                                                "data": "cpu_use_pct"
+                                            },
+                                            {
+                                                "name": "CPUs",
+                                                "data": "cpu_count"
+                                            },
+                                            {
+                                                "name": "Mem Use (MB)",
+                                                "data": "memory_used_mb"
+                                            },
+                                            {
+                                                "name": "Mem Total (MB)",
+                                                "data": "memory_allocated_mb"
+                                            },
+                                            {
+                                                "name": "Storage Used (GB)",
+                                                "data": "used_space_gb"
+                                            },
+                                            {
+                                                "name": "Snapshots",
+                                                "data": "snapshots"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "custom:flex-table-card",
+                                    "title": "ESXi-01 Datastores",
+                                    "clickable": false,
+                                    "sort_by": "name",
+                                    "entities": {
+                                        "include": "sensor.esxi_datastore_esxi1*"
+                                    },
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "data": "name"
+                                        },
+                                        {
+                                            "name": "Free Space (GB)",
+                                            "data": "free_space_gb"
+                                        },
+                                        {
+                                            "name": "Capacity (GB)",
+                                            "data": "total_space_gb"
+                                        },
+                                        {
+                                            "name": "Hosts",
+                                            "data": "connected_hosts"
+                                        },
+                                        {
+                                            "name": "VMs",
+                                            "data": "virtual_machines"
+                                        },
+                                        {
+                                            "name": "Type",
+                                            "data": "type"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "theme": "kibibit",
+                    "title": "ESXi-02 Stats",
+                    "path": "esxi-02-stats",
+                    "type": "panel",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "custom:flex-table-card",
+                                    "title": "ESXi-02 Hosts",
+                                    "clickable": false,
+                                    "sort_by": "name+",
+                                    "entities": {
+                                        "include": "sensor.esxi_vmhost_192.168.0.252"
+                                    },
+                                    "columns": [
+                                        {
+                                            "name": "Name",
+                                            "data": "name"
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "data": "version"
+                                        },
+                                        {
+                                            "name": "Uptime (H)",
+                                            "data": "uptime_hours"
+                                        },
+                                        {
+                                            "name": "CPU Use (GHz)",
+                                            "data": "cpuusage_ghz"
+                                        },
+                                        {
+                                            "name": "Mem Use (GB)",
+                                            "data": "memusage_gb"
+                                        },
+                                        {
+                                            "name": "VMs",
+                                            "data": "vms"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:auto-entities",
+                                    "filter": {
+                                        "include": [
+                                            {
+                                                "entity_id": "sensor.esxi_vm_*",
+                                                "attributes": {
+                                                    "host_name": "192.168.0.252"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "card": {
+                                        "type": "custom:flex-table-card",
+                                        "title": "ESXi-02 Virtual Machines",
+                                        "clickable": false,
+                                        "sort_by": "name",
+                                        "columns": [
+                                            {
+                                                "name": "Name",
+                                                "data": "name"
+                                            },
+                                            {
+                                                "name": "Status",
+                                                "data": "status"
+                                            },
+                                            {
+                                                "name": "State",
+                                                "data": "state"
+                                            },
+                                            {
+                                                "name": "Uptime (H)",
+                                                "data": "uptime_hours"
+                                            },
+                                            {
+                                                "name": "IP Addr",
+                                                "data": "guest_ip"
+                                            },
+                                            {
+                                                "name": "CPU Usage (%)",
+                                                "data": "cpu_use_pct"
+                                            },
+                                            {
+                                                "name": "CPUs",
+                                                "data": "cpu_count"
+                                            },
+                                            {
+                                                "name": "Mem Use (MB)",
+                                                "data": "memory_used_mb"
+                                            },
+                                            {
+                                                "name": "Mem Total (MB)",
+                                                "data": "memory_allocated_mb"
+                                            },
+                                            {
+                                                "name": "Storage Used (GB)",
+                                                "data": "used_space_gb"
+                                            },
+                                            {
+                                                "name": "Snapshots",
+                                                "data": "snapshots"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "custom:flex-table-card",
+                                    "title": "ESXi-02 Datastores",
+                                    "clickable": false,
+                                    "sort_by": "name",
+                                    "entities": {
+                                        "include": "sensor.esxi_datastore_esxi2*"
                                     },
                                     "columns": [
                                         {

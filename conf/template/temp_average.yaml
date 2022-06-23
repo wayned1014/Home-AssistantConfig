@@ -2,4 +2,3 @@
     - name: 'Temp Average'
       unit_of_measurement: '°F'
       state: '{{ states.sensor.thermostat_temperature.state | round(1) }}'
-

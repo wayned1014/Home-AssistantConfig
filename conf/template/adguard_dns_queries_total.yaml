@@ -1,0 +1,5 @@
+- sensor:
+    - name: 'AdGuard DNS Queries Total'
+      unit_of_measurement: 'queries'
+      icon: mdi:magnify
+      state: "{{ int(states('sensor.adguard_dns_queries')) + int(states('sensor.adguard_dns_queries_2')) }}"

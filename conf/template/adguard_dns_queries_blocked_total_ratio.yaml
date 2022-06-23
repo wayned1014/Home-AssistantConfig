@@ -1,0 +1,5 @@
+- sensor:
+    - name: 'AdGuard DNS Queries Blocked Total Ratio'
+      unit_of_measurement: '%'
+      icon: mdi:magnify-close
+      state: "{{ ((int(states('sensor.adguard_dns_queries_blocked_total')) / int(states('sensor.adguard_dns_queries_total'))) * 100) | round(2) }}"

@@ -92,3 +92,35 @@ recorder:
 
 logger:
   default: info
+
+influxdb:
+  api_version: 2
+  ssl: false
+  host: 192.168.200.3
+  port: 8086
+  token: !secret influxdb_token
+  organization: ha
+  bucket: home_assistant
+  tags:
+    source: HA
+  tags_attributes:
+    - friendly_name
+  default_measurement: units
+  exclude:
+    entities:
+      - zone.home
+    domains:
+      - persistent_notification
+      - person
+  include:
+    domains:
+      - sensor
+      - binary_sensor
+      - sun
+    entities:
+      - weather.kldj_daynight
+
+geo_location:
+  - platform: usgs_earthquakes_feed
+    feed_type: "past_month_all_earthquakes"
+    radius: 75

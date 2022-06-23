@@ -1,7 +1,7 @@
 - sensor:
     - name: 'MariaDB Uptime'
       state: >
-        {% set days = states["sensor.esxi_vm_mariadb01"].attributes.uptime_hours/24 %}
+        {% set days = states["sensor.esxi_vm_mariadb02"].attributes.uptime_hours/24 %}
         {% set up_dys = days|int %}
         {% set hours = (days-up_dys)*24 %}
         {% set up_hrs = hours|int %}

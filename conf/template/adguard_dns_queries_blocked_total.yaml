@@ -1,0 +1,5 @@
+- sensor:
+    - name: 'AdGuard DNS Queries Blocked Total'
+      unit_of_measurement: 'queries'
+      icon: mdi:magnify-close
+      state: "{{ states('sensor.adguard_dns_queries_blocked') | int + states('sensor.adguard_dns_queries_blocked_2') | int }}"
