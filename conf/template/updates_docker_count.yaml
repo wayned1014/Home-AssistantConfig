@@ -1,0 +1,3 @@
+- sensor:
+    - name: 'Updates Docker Count'
+      state: "{{ expand(area_entities('Updates'))|selectattr('attributes.docker_compose','eq','true') | list | count }}"

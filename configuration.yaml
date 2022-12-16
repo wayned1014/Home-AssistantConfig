@@ -47,6 +47,8 @@ rest: !include_dir_merge_list conf/rest/
 switch: !include_dir_merge_list conf/switch/
 rest_command: !include_dir_merge_named conf/rest_command/
 fan: !include_dir_merge_list conf/fan/
+# scrape: !include_dir_merge_list conf/scrape
+multiscrape: !include_dir_merge_list conf/multiscrape
 
 mqtt:
   sensor: !include_dir_merge_list conf/mqtt/

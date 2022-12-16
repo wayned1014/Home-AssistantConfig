@@ -245,3 +245,28 @@ owntone01_power_off:
       entity_id:
       - media_player.owntone_output_bedroom_speaker
   mode: single
+'1663249897491':
+  alias: New Script
+  sequence:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      title: '{{ title }}'
+      message: '{{ message }}'
+  mode: parallel
+'1663250146278':
+  alias: New Script
+  sequence:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      title: Test
+      message: My Message
+  mode: parallel
+keymaster_frontdoor_manual_notify:
+  alias: Keymaster Frontdoor Manual Notify
+  sequence:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Test Message
+      title: Test Title
+  mode: parallel
+  max: 10
