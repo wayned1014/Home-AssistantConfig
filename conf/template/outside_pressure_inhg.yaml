@@ -1,0 +1,5 @@
+- sensor:
+    - name: 'Outside Pressure inHg'
+      unit_of_measurement: 'inHg'
+      icon: mdi:gauge
+      state: '{{ (states.sensor.outside_pressure.state | float * 2.03602) | round(2,default=0) }}'

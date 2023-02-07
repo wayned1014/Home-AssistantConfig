@@ -159,3 +159,34 @@
       mobile_app_device: e072311933925cbee3f9dbee5b460a38
       only_after: 08:00:00
       only_before: '23:00:00'
+- id: '1671396670067'
+  alias: Uptime Robot Announcement
+  description: ''
+  trigger:
+  - platform: event
+    event_type: call-service
+    event_data:
+      domain: notify
+      service: mobile_app_sm_g986u
+      service_data:
+        title: Uptime Kuma
+        data:
+          status: 0
+  condition: []
+  action: []
+  mode: single
+- id: '1673390530487'
+  alias: Eufy - Motion Detect
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.doorbell_motion_detected
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Motion Detected by HA
+      title: Eufy
+  mode: single

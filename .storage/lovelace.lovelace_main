@@ -517,7 +517,7 @@
                       "name": "Humidity"
                     },
                     {
-                      "entity": "sensor.outside_pressure",
+                      "entity": "sensor.outside_pressure_inhg",
                       "name": "Pressure"
                     }
                   ]
@@ -1749,6 +1749,9 @@
                 }
               ],
               "card": {
+                "show_state": true,
+                "show_name": true,
+                "camera_view": "auto",
                 "type": "picture-entity",
                 "entity": "camera.doorbell",
                 "tap_action": {
@@ -1759,6 +1762,25 @@
                     "entity_id": "camera.doorbell"
                   }
                 }
+              }
+            },
+            {
+              "type": "conditional",
+              "conditions": [
+                {
+                  "entity": "binary_sensor.doorbell_motion_detected",
+                  "state": "off"
+                }
+              ],
+              "card": {
+                "camera_view": "auto",
+                "type": "picture-glance",
+                "title": "Kitchen",
+                "entities": [
+                  "binary_sensor.remote_ui",
+                  "sensor.time"
+                ],
+                "camera_image": "camera.doorbell"
               }
             }
           ]
