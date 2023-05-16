@@ -405,11 +405,6 @@
               "entity": "sensor.updates_available_count",
               "name": "# Srv w/Updates",
               "style": ":host {\n  color: white;\n  }\n"
-            },
-            {
-              "entity": "sensor.updates_docker_count",
-              "name": "# Srv w/Docker Updates",
-              "style": ":host {\n  color: white;\n  }\n"
             }
           ],
           "cards": [
@@ -550,6 +545,27 @@
                   ]
                 },
                 {
+                  "entity": "sensor.bathroom_temperature",
+                  "type": "custom:multiple-entity-row",
+                  "name": "Bathroom",
+                  "secondary_info": {
+                    "entity": "sensor.bathroom_battery",
+                    "name": "BAT",
+                    "unit": "%"
+                  },
+                  "state_header": "Temp",
+                  "entities": [
+                    {
+                      "entity": "sensor.bathroom_humidity",
+                      "name": "Humidity"
+                    },
+                    {
+                      "entity": "sensor.bathroom_pressure",
+                      "name": "Pressure"
+                    }
+                  ]
+                },
+                {
                   "entity": "sensor.motion_light_and_temperature_sensor_air_temperature",
                   "name": "Motion Sensor",
                   "type": "custom:multiple-entity-row",
@@ -565,6 +581,20 @@
                       "name": "Illuminance"
                     }
                   ]
+                },
+                {
+                  "entity": "sensor.gas_meter",
+                  "name": "Gas Meter Reading"
+                },
+                {
+                  "entity": "sensor.gas_utility_meter",
+                  "name": "Gas Monthly Usage (27-26)",
+                  "type": "custom:multiple-entity-row",
+                  "secondary_info": {
+                    "attribute": "last_period",
+                    "name": "Last Month: ",
+                    "unit": "ccf"
+                  }
                 }
               ]
             },
@@ -1520,9 +1550,7 @@
               }
             },
             {
-              "type": "custom:sun-card",
-              "showAzimuth": true,
-              "showElevation": true
+              "type": "custom:horizon-card"
             },
             {
               "type": "custom:googletimers-card",
@@ -1656,6 +1684,21 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "custom:mushroom-light-card",
+              "entity": "light.kitchen_light",
+              "icon_type": "none",
+              "use_light_color": true,
+              "show_brightness_control": true,
+              "show_color_control": true,
+              "show_color_temp_control": true,
+              "hold_action": {
+                "action": "none"
+              },
+              "double_tap_action": {
+                "action": "none"
+              }
             }
           ]
         },
@@ -1686,7 +1729,7 @@
               "view": {
                 "default": "snapshot",
                 "camera_select": "snapshot",
-                "update_force": false,
+                "update_force": true,
                 "update_cycle_camera": false
               },
               "menu": {
@@ -1769,7 +1812,7 @@
               "conditions": [
                 {
                   "entity": "binary_sensor.doorbell_motion_detected",
-                  "state": "off"
+                  "state": "on"
                 }
               ],
               "card": {

@@ -95,6 +95,10 @@
   trigger:
   - platform: webhook
     webhook_id: 21582bf2-7327-45e7-9a0b-04a33d7c43d2-8dd5245e-42a8-4e15-9884-b3bade86ecce
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: true
   condition: []
   action:
   - service: input_text.set_value
@@ -189,4 +193,44 @@
     data:
       message: Motion Detected by HA
       title: Eufy
+  mode: single
+- id: '1676045424188'
+  alias: Notification - FedEx Package Notification
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.mail_fedex_delivered
+    above: 0
+  condition: []
+  action:
+  - condition: numeric_state
+    entity_id: sensor.mail_fedex_delivered
+    above: -0.6
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Looks like Fedex delivered your package. {{ states.sensor.mail_fedex_delivered.state
+        }} / {{ states.sensor.mail_fedex_packages.state }} packages delivered.
+      title: Fedex Delivery
+  mode: single
+- id: '1682546505858'
+  alias: restart 'rtlamr2mqtt' When Locked
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.gas_meter
+    to:
+    for:
+      hours: 3
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: hassio.addon_restart
+    data:
+      addon: 6713e36e_rtlamr2mqtt
+    enabled: true
+  - service: notify.mobile_app_sm_g986u
+    data:
+      message: Restarting 'rtlamr2mqtt'
   mode: single
