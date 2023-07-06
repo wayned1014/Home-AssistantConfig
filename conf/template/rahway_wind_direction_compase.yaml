@@ -1,0 +1,6 @@
+- sensor: 
+    - name: 'Rahway Wind Direction Compass'
+      state: >
+        {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+        {% set degree = states('sensor.rahway_wind_direction')|float %}
+        {{ direction[((degree+11.25)/22.5)|int] }}

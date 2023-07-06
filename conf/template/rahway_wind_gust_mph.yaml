@@ -1,0 +1,4 @@
+- sensor:
+    - name: 'Rahway Wind Gust MPH'
+      unit_of_measurement: 'mph'
+      state: "{{ '%.2f' | format(states.sensor.rahway_wind_gust.state | float(0) * 2.23694) }}"

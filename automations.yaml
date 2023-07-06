@@ -149,7 +149,7 @@
       update_entities:
       - update.*
 - id: '1657719949164'
-  alias: Update notifications
+  alias: HA Update notifications
   description: ''
   use_blueprint:
     path: mdegat01/update_notifications.yaml
@@ -163,6 +163,7 @@
       mobile_app_device: e072311933925cbee3f9dbee5b460a38
       only_after: 08:00:00
       only_before: '23:00:00'
+      run_config_check: false
 - id: '1671396670067'
   alias: Uptime Robot Announcement
   description: ''
@@ -233,4 +234,28 @@
   - service: notify.mobile_app_sm_g986u
     data:
       message: Restarting 'rtlamr2mqtt'
+  mode: single
+- id: '1687703076206'
+  alias: Mets game start
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ as_timestamp(states.sensor.mets_tracker.attributes.date) -
+      as_timestamp(now()) < 600 }}'
+  condition:
+  - condition: state
+    entity_id: media_player.sony_bravia_tv
+    state: 'on'
+  action:
+  - service: notify.android_tv_fire_tv
+    data:
+      message: Game starting in 10 minutes
+      title: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{ states.sensor.mets_tracker.attributes.opponent_name
+        }}'
+      data:
+        duration: 15
+  - service: notify.google_assistant_sdk
+    data:
+      message: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{     states.sensor.mets_tracker.attributes.opponent_name
+        }} starts in 10 minutes.'
   mode: single

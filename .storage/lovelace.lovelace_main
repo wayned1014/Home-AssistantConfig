@@ -1061,14 +1061,201 @@
                   "title": "AdGuard Statistics"
                 },
                 {
-                  "type": "gauge",
-                  "entity": "sensor.adguard_dns_queries_blocked_total_ratio",
-                  "card_mod": {
-                    "style": ":host {\n --label-badge-blue: {% if is_state('switch.adguard_protection', 'on') %} green {% else %} red {% endif %}\n }\n"
+                  "type": "custom:flex-horseshoe-card",
+                  "entities": [
+                    {
+                      "entity": "sensor.adguard_dns_queries_blocked_total_ratio",
+                      "decimals": 2,
+                      "icon": "mdi:memory",
+                      "name": "DNS Queries Blocked Ratio",
+                      "area": "Average"
+                    },
+                    {
+                      "entity": "sensor.adguard_dns_queries_blocked_ratio",
+                      "decimals": 2,
+                      "name": "(AdGuard 01)"
+                    },
+                    {
+                      "entity": "sensor.adguard_dns_queries_blocked_ratio_2",
+                      "decimals": 2,
+                      "name": "(AdGuard 02)"
+                    }
+                  ],
+                  "show": {
+                    "scale_tickmarks": true
                   },
-                  "min": 0,
-                  "max": 100,
-                  "name": "DNS Queries Blocked Ratio"
+                  "layout": {
+                    "hlines": [
+                      {
+                        "id": 0,
+                        "xpos": 50,
+                        "ypos": 38,
+                        "length": 40,
+                        "styles": [
+                          {
+                            "stroke": "var(--primary-text-color);"
+                          },
+                          {
+                            "stroke-width": "5;"
+                          },
+                          {
+                            "opacity": "0.9;"
+                          },
+                          {
+                            "stroke-linecap": "round;"
+                          }
+                        ],
+                        "color": "#FFF6E3"
+                      }
+                    ],
+                    "vlines": [
+                      {
+                        "id": 0,
+                        "xpos": 50,
+                        "ypos": 56,
+                        "length": 20,
+                        "styles": [
+                          {
+                            "stroke": "var(--primary-text-color);"
+                          },
+                          {
+                            "opacity": "0.5;"
+                          },
+                          {
+                            "stroke-width": "2;"
+                          },
+                          {
+                            "stroke-linecap": "round;"
+                          }
+                        ]
+                      }
+                    ],
+                    "states": [
+                      {
+                        "id": 0,
+                        "entity_index": 0,
+                        "xpos": 50,
+                        "ypos": 30,
+                        "styles": [
+                          {
+                            "font-size": "2em;"
+                          },
+                          {
+                            "opacity": "0.9;"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 1,
+                        "entity_index": 1,
+                        "xpos": 46,
+                        "ypos": 54,
+                        "styles": [
+                          {
+                            "font-size": "1.5em;"
+                          },
+                          {
+                            "text-anchor": "end;"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 2,
+                        "entity_index": 2,
+                        "xpos": 54,
+                        "ypos": 54,
+                        "styles": [
+                          {
+                            "font-size": "1.5em;"
+                          },
+                          {
+                            "text-anchor": "start;"
+                          }
+                        ]
+                      }
+                    ],
+                    "names": [
+                      {
+                        "id": 0,
+                        "entity_index": 0,
+                        "xpos": 50,
+                        "ypos": 99,
+                        "styles": [
+                          {
+                            "font-size": "1.0em;"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 1,
+                        "entity_index": 1,
+                        "xpos": 46,
+                        "ypos": 62,
+                        "styles": [
+                          {
+                            "font-size": "0.7em;"
+                          },
+                          {
+                            "text-anchor": "end;"
+                          },
+                          {
+                            "opacity": "0.7;"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 2,
+                        "entity_index": 2,
+                        "xpos": 54,
+                        "ypos": 62,
+                        "styles": [
+                          {
+                            "font-size": "0.7em;"
+                          },
+                          {
+                            "text-anchor": "start;"
+                          },
+                          {
+                            "opacity": "0.7;"
+                          }
+                        ]
+                      }
+                    ],
+                    "areas": [
+                      {
+                        "id": 0,
+                        "entity_index": 0,
+                        "xpos": 50,
+                        "ypos": 85,
+                        "styles": [
+                          {
+                            "font-size": "1.2em;"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "horseshoe_state": {
+                    "color": "#FFF6E3"
+                  },
+                  "horseshoe_scale": {
+                    "min": 0,
+                    "max": 100,
+                    "color": "var(--primary-background-color)",
+                    "width": 6
+                  },
+                  "color_stops": {
+                    "0": "#FFF6E3",
+                    "10": "#FFE9B9",
+                    "20": "#FFDA8A",
+                    "30": "#FFCB5B",
+                    "40": "#FFBF37",
+                    "50": "#ffb414",
+                    "60": "#FFAD12",
+                    "70": "#FFA40E",
+                    "80": "#FF9C0B",
+                    "90": "#FF8C06"
+                  }
                 }
               ]
             },
@@ -1303,6 +1490,10 @@
                       "label": "Hazardous"
                     }
                   ]
+                },
+                {
+                  "type": "markdown",
+                  "content": "## <center>Updated {{ states.sensor.rahway_wind_speed_mph.attributes.LastUpdate }} </center>\n"
                 }
               ]
             },
@@ -1360,6 +1551,10 @@
                       "label": "Hazardous"
                     }
                   ]
+                },
+                {
+                  "type": "markdown",
+                  "content": "## <center>Updated {{ states.sensor.flemington_wind_speed_mph.attributes.LastUpdate }} </center>\n"
                 }
               ]
             },
@@ -1703,128 +1898,161 @@
           ]
         },
         {
-          "theme": "kibibit",
           "title": "Camera's",
           "path": "cameras",
+          "theme": "kibibit",
+          "type": "panel",
           "badges": [],
           "cards": [
             {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.frigate_front"
-                }
-              ],
-              "view": {
-                "default": "live"
-              }
-            },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.frigate_front"
-                }
-              ],
-              "view": {
-                "default": "snapshot",
-                "camera_select": "snapshot",
-                "update_force": true,
-                "update_cycle_camera": false
-              },
-              "menu": {
-                "style": "none"
-              },
-              "media_viewer": {
-                "draggable": false,
-                "controls": {
-                  "thumbnails": {
-                    "show_details": true
-                  },
-                  "next_previous": {
-                    "style": "none"
-                  }
-                }
-              }
-            },
-            {
-              "type": "custom:stack-in-card",
+              "type": "horizontal-stack",
               "cards": [
                 {
-                  "show_state": false,
-                  "show_name": false,
-                  "camera_view": "live",
-                  "type": "picture-entity",
-                  "entity": "camera.front_image",
-                  "tap_action": {
-                    "action": "more-info"
-                  },
-                  "hold_action": {
-                    "action": "none"
-                  },
-                  "name": "Plate Minder"
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:frigate-card",
+                      "cameras": [
+                        {
+                          "camera_entity": "camera.frigate_front"
+                        }
+                      ],
+                      "view": {
+                        "default": "live"
+                      }
+                    },
+                    {
+                      "type": "custom:frigate-card",
+                      "cameras": [
+                        {
+                          "camera_entity": "camera.frigate_front"
+                        }
+                      ],
+                      "view": {
+                        "default": "snapshot",
+                        "camera_select": "snapshot",
+                        "update_force": true,
+                        "update_cycle_camera": false
+                      },
+                      "menu": {
+                        "style": "none"
+                      },
+                      "media_viewer": {
+                        "draggable": false,
+                        "controls": {
+                          "thumbnails": {
+                            "show_details": true
+                          },
+                          "next_previous": {
+                            "style": "none"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
-                  "show_state": false,
-                  "show_name": false,
-                  "camera_view": "live",
-                  "type": "picture-entity",
-                  "entity": "camera.front_roi",
-                  "tap_action": {
-                    "action": "none"
-                  },
-                  "hold_action": {
-                    "action": "none"
-                  }
+                  "square": false,
+                  "columns": 1,
+                  "type": "grid",
+                  "cards": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "camera.doorbell",
+                          "state": "idle"
+                        }
+                      ],
+                      "card": {
+                        "show_state": true,
+                        "show_name": true,
+                        "camera_view": "auto",
+                        "type": "picture-entity",
+                        "entity": "camera.doorbell",
+                        "camera_image": "camera.doorbell",
+                        "tap_action": {
+                          "action": "call-service",
+                          "service": "camera.turn_on",
+                          "data": {},
+                          "target": {
+                            "entity_id": "camera.doorbell"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "camera.doorbell",
+                          "state": "streaming"
+                        }
+                      ],
+                      "card": {
+                        "type": "vertical-stack",
+                        "cards": [
+                          {
+                            "show_name": true,
+                            "show_icon": false,
+                            "type": "button",
+                            "tap_action": {
+                              "action": "call-service",
+                              "service": "camera.turn_off",
+                              "data": {},
+                              "target": {
+                                "entity_id": "camera.doorbell"
+                              }
+                            },
+                            "entity": "camera.doorbell",
+                            "name": "Stop"
+                          },
+                          {
+                            "type": "custom:webrtc-camera",
+                            "entity": "camera.doorbell"
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 },
                 {
-                  "type": "markdown",
-                  "content": "<center>Identified as: {{ states.sensor.front_plate.state }} </center>"
+                  "type": "custom:stack-in-card",
+                  "cards": [
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "live",
+                      "type": "picture-entity",
+                      "entity": "camera.front_image",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "hold_action": {
+                        "action": "none"
+                      },
+                      "name": "Plate Minder"
+                    },
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "live",
+                      "type": "picture-entity",
+                      "entity": "camera.front_roi",
+                      "tap_action": {
+                        "action": "none"
+                      },
+                      "hold_action": {
+                        "action": "none"
+                      }
+                    },
+                    {
+                      "type": "markdown",
+                      "content": "<center>Identified as: {{ states.sensor.front_plate.state }} </center>"
+                    }
+                  ]
                 }
               ]
-            },
-            {
-              "type": "conditional",
-              "conditions": [
-                {
-                  "entity": "binary_sensor.doorbell_streaming_sensor",
-                  "state": "False"
-                }
-              ],
-              "card": {
-                "show_state": true,
-                "show_name": true,
-                "camera_view": "auto",
-                "type": "picture-entity",
-                "entity": "camera.doorbell",
-                "tap_action": {
-                  "action": "call-service",
-                  "service": "eufy_security.start_rtsp_livestream",
-                  "service_data": {},
-                  "target": {
-                    "entity_id": "camera.doorbell"
-                  }
-                }
-              }
-            },
-            {
-              "type": "conditional",
-              "conditions": [
-                {
-                  "entity": "binary_sensor.doorbell_motion_detected",
-                  "state": "on"
-                }
-              ],
-              "card": {
-                "camera_view": "auto",
-                "type": "picture-glance",
-                "title": "Kitchen",
-                "entities": [
-                  "binary_sensor.remote_ui",
-                  "sensor.time"
-                ],
-                "camera_image": "camera.doorbell"
-              }
             }
           ]
         },
