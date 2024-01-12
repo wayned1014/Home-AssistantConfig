@@ -4,9 +4,6 @@ sonos_say:
   - service: sonos.snapshot
     data_template:
       entity_id: '{{ sonos_primary|default(''media_player.sonos_arc_2'') }}'
-  - service: sonos.unjoin
-    data_template:
-      entity_id: '{{ sonos_primary|default(''media_player.sonos_arc_2'') }}'
   - service: media_player.volume_set
     data_template:
       entity_id: '{{ sonos_primary|default(''media_player.sonos_arc_2'') }}'

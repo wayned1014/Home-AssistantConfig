@@ -7,4 +7,6 @@
     - type: throughput_network_out
       arg: eth0
     - type: last_boot
-    
+    - type: disk_use_percent
+    - type: disk_use
+    - type: disk_free

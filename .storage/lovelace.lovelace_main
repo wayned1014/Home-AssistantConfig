@@ -369,42 +369,58 @@
             {
               "entity": "sensor.lock_mode",
               "name": "Front Door",
-              "style": ":host {\n  color: white;\n  --label-badge-red: {% if is_state('lock.touchscreen_deadbolt_current_lock_mode', 'unlocked') %} green {% else %} red {% endif %};\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  --label-badge-red: {% if is_state('lock.touchscreen_deadbolt_current_lock_mode', 'unlocked') %} green {% else %} red {% endif %};\n  }\n"
+              }
             },
             {
               "entity": "binary_sensor.zcombo_g_smoke_co_alarm_co_alarm_carbon_monoxide_detected",
               "name": "Smoke/CO Alarm",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "binary_sensor.front_door_access_control_window_door_is_open",
               "name": "Front Door",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "binary_sensor.washing_machine_leak_sensor_water_alarm_water_leak_detected",
               "name": "Washing Machine",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "binary_sensor.water_heater_leak_sensor_water_alarm_water_leak_detected",
               "name": "Water Heater",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "alarm_control_panel.alarmo",
               "name": "House Alarm",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "sensor.apc_nut_status",
               "name": "UPS",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             },
             {
               "entity": "sensor.updates_available_count",
               "name": "# Srv w/Updates",
-              "style": ":host {\n  color: white;\n  }\n"
+              "card_mod": {
+                "style": ":host {\n  color: white;\n  }\n"
+              }
             }
           ],
           "cards": [
@@ -473,6 +489,10 @@
                         {
                           "entity": "sensor.uptime_ha",
                           "name": "System Uptime"
+                        },
+                        {
+                          "entity": "sensor.disk_use_percent",
+                          "name": "Disk use (percent)"
                         }
                       ]
                     }
@@ -599,7 +619,7 @@
               ]
             },
             {
-              "entity": "fan.in_wall_smart_fan_control",
+              "entity": "fan.in_wall_fan_speed_control_500s",
               "type": "custom:button-card",
               "template": "presets",
               "name": "Living Room",
@@ -610,7 +630,7 @@
                 }
               ],
               "variables": {
-                "entity": "fan.in_wall_smart_fan_control",
+                "entity": "fan.in_wall_fan_speed_control_500s",
                 "option_template": "fan-option",
                 "option_button_on_color": "rgb(120,120,120)",
                 "option1_name": "Low",
@@ -657,6 +677,13 @@
                   "hide": {
                     "temperature": true
                   },
+                  "layout": {
+                    "mode": {
+                      "names": true,
+                      "icons": true,
+                      "headings": false
+                    }
+                  },
                   "sensors": [
                     {
                       "entity": "sensor.thermostat_temperature",
@@ -666,9 +693,7 @@
                   "show_header": false,
                   "control": {
                     "hvac": {
-                      "heat_cool": {
-                        "include": false
-                      }
+                      "auto": false
                     }
                   },
                   "step_size": "1",
@@ -1894,6 +1919,231 @@
               "double_tap_action": {
                 "action": "none"
               }
+            },
+            {
+              "id": "synology_status",
+              "type": "custom:config-template-card",
+              "entities": [
+                "sensor.nas01_temperature"
+              ],
+              "card": {
+                "type": "entities",
+                "show_header_toggle": "off",
+                "style": ".card-header {\n  padding: 0px 0px 0px 0px !important;\n}\n",
+                "entities": [
+                  {
+                    "type": "section",
+                    "style": ".label {\n  text-align: center !important;\n  margin-left: 0px !important;\n  font-size: 17px !important;\n}\n",
+                    "label": "Synology DS925+"
+                  },
+                  {
+                    "type": "custom:hui-vertical-stack-card",
+                    "cards": [
+                      {
+                        "type": "horizontal-stack",
+                        "cards": [
+                          {
+                            "type": "picture",
+                            "style": "ha-card { \n    --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n}\n",
+                            "image": "/local/images/ds923_plus.png"
+                          },
+                          {
+                            "type": "custom:button-card",
+                            "layout": "icon_name_state2nd",
+                            "show_icon": true,
+                            "show_state": true,
+                            "styles": {
+                              "grid": null,
+                              "card": [
+                                {
+                                  "--ha-card-background": "rgba(0, 0, 0, 0.0)"
+                                },
+                                {
+                                  "--ha-card-box-shadow": "none"
+                                }
+                              ],
+                              "icon": [
+                                {
+                                  "padding": "10px 0px 0px"
+                                },
+                                {
+                                  "height": "40px"
+                                },
+                                {
+                                  "width": "40px"
+                                }
+                              ],
+                              "state": [
+                                {
+                                  "padding": "10px 0px 0px"
+                                },
+                                {
+                                  "justify-self": "start"
+                                },
+                                {
+                                  "font-family": "Roboto, sans-serif"
+                                },
+                                {
+                                  "font-size": "14px"
+                                }
+                              ],
+                              "name": [
+                                {
+                                  "padding": "20px 0px 0px"
+                                },
+                                {
+                                  "justify-self": "start"
+                                }
+                              ]
+                            },
+                            "entity": "sensor.nas01_temperature",
+                            "name": "Temperature:",
+                            "icon": "mdi:thermometer"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "horizontal-stack",
+                        "cards": [
+                          {
+                            "type": "custom:bar-card",
+                            "show_icon": true,
+                            "align": "split",
+                            "columns": 1,
+                            "max": 100,
+                            "positions": {
+                              "icon": "inside",
+                              "indicator": "inside",
+                              "name": "inside",
+                              "value": "inside"
+                            },
+                            "unit_of_measurement": "%",
+                            "severity": [
+                              {
+                                "value": 50,
+                                "color": "#3498db"
+                              },
+                              {
+                                "value": 75,
+                                "color": "#f39c12"
+                              },
+                              {
+                                "value": 100,
+                                "color": "#e45e65"
+                              }
+                            ],
+                            "style": "ha-card { \n  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n  --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n  --paper-item-icon-color: 'var(--text-primary-color)';\n  --ha-card-box-shadow: 'none';\n}\nbar-card-name {\n  margin-left: -10px;\n}\n",
+                            "entity": "sensor.nas01_cpu_utilization_total",
+                            "name": "CPU Utilization",
+                            "icon": "mdi:battery-high",
+                            "entity_row": true
+                          },
+                          {
+                            "type": "custom:bar-card",
+                            "show_icon": true,
+                            "align": "split",
+                            "columns": 1,
+                            "max": 100,
+                            "positions": {
+                              "icon": "inside",
+                              "indicator": "inside",
+                              "name": "inside",
+                              "value": "inside"
+                            },
+                            "unit_of_measurement": "%",
+                            "severity": [
+                              {
+                                "value": 50,
+                                "color": "#3498db"
+                              },
+                              {
+                                "value": 75,
+                                "color": "#f39c12"
+                              },
+                              {
+                                "value": 100,
+                                "color": "#e45e65"
+                              }
+                            ],
+                            "style": "ha-card { \n  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n  --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n  --paper-item-icon-color: 'var(--text-primary-color)';\n  --ha-card-box-shadow: 'none';\n}\nbar-card-name {\n  margin-left: -10px;\n}\n",
+                            "entity": "sensor.nas01_memory_usage_real",
+                            "name": "${ 'Memory Usage' }",
+                            "entity_row": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "horizontal-stack",
+                        "cards": [
+                          {
+                            "type": "custom:bar-card",
+                            "show_icon": true,
+                            "align": "split",
+                            "columns": 1,
+                            "max": 100,
+                            "positions": {
+                              "icon": "inside",
+                              "indicator": "inside",
+                              "name": "inside",
+                              "value": "inside"
+                            },
+                            "unit_of_measurement": "%",
+                            "severity": [
+                              {
+                                "value": 50,
+                                "color": "#3498db"
+                              },
+                              {
+                                "value": 75,
+                                "color": "#f39c12"
+                              },
+                              {
+                                "value": 100,
+                                "color": "#e45e65"
+                              }
+                            ],
+                            "style": "ha-card { \n  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n  --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n  --paper-item-icon-color: 'var(--text-primary-color)';\n  --ha-card-box-shadow: 'none';\n}\nbar-card-name {\n  margin-left: -10px;\n}\n",
+                            "entity": "sensor.nas01_volume_1_volume_used",
+                            "name": "Volume Utilization",
+                            "icon": "mdi:chart-pie",
+                            "entity_row": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "entities",
+                        "entities": [
+                          {
+                            "entity": "sensor.nas01_last_boot",
+                            "name": "Last Boot",
+                            "icon": "mdi:clock"
+                          },
+                          {
+                            "entity": "update.nas01_dsm_update",
+                            "name": "DSM Update",
+                            "icon": "mdi:update"
+                          },
+                          {
+                            "type": "attribute",
+                            "entity": "update.nas01_dsm_update",
+                            "attribute": "latest_version",
+                            "name": "Latest Version",
+                            "icon": "mdi:update"
+                          },
+                          {
+                            "type": "attribute",
+                            "entity": "update.nas01_dsm_update",
+                            "attribute": "installed_version",
+                            "name": "Installed Version",
+                            "icon": "mdi:update"
+                          }
+                        ],
+                        "style": "ha-card { \n    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';\n    --ha-card-background: \"rgba(0, 0, 0, 0.0)\";\n    --paper-item-icon-color: 'var(--text-primary-color)';\n    --ha-card-box-shadow: 'none';\n}\n"
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           ]
         },
@@ -1952,66 +2202,42 @@
                   ]
                 },
                 {
-                  "square": false,
-                  "columns": 1,
-                  "type": "grid",
+                  "type": "vertical-stack",
                   "cards": [
                     {
-                      "type": "conditional",
-                      "conditions": [
+                      "type": "custom:frigate-card",
+                      "cameras": [
                         {
-                          "entity": "camera.doorbell",
-                          "state": "idle"
+                          "camera_entity": "camera.frigate_doorbell"
                         }
-                      ],
-                      "card": {
-                        "show_state": true,
-                        "show_name": true,
-                        "camera_view": "auto",
-                        "type": "picture-entity",
-                        "entity": "camera.doorbell",
-                        "camera_image": "camera.doorbell",
-                        "tap_action": {
-                          "action": "call-service",
-                          "service": "camera.turn_on",
-                          "data": {},
-                          "target": {
-                            "entity_id": "camera.doorbell"
-                          }
-                        }
-                      }
+                      ]
                     },
                     {
-                      "type": "conditional",
-                      "conditions": [
+                      "type": "custom:frigate-card",
+                      "cameras": [
                         {
-                          "entity": "camera.doorbell",
-                          "state": "streaming"
+                          "camera_entity": "camera.frigate_doorbell"
                         }
                       ],
-                      "card": {
-                        "type": "vertical-stack",
-                        "cards": [
-                          {
-                            "show_name": true,
-                            "show_icon": false,
-                            "type": "button",
-                            "tap_action": {
-                              "action": "call-service",
-                              "service": "camera.turn_off",
-                              "data": {},
-                              "target": {
-                                "entity_id": "camera.doorbell"
-                              }
-                            },
-                            "entity": "camera.doorbell",
-                            "name": "Stop"
+                      "view": {
+                        "default": "snapshot",
+                        "camera_select": "snapshot",
+                        "update_force": true,
+                        "update_cycle_camera": false
+                      },
+                      "menu": {
+                        "style": "none"
+                      },
+                      "media_viewer": {
+                        "draggable": false,
+                        "controls": {
+                          "thumbnails": {
+                            "show_details": true
                           },
-                          {
-                            "type": "custom:webrtc-camera",
-                            "entity": "camera.doorbell"
+                          "next_previous": {
+                            "style": "none"
                           }
-                        ]
+                        }
                       }
                     }
                   ]
@@ -3790,6 +4016,21 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "title": "VM - Grafana",
+          "path": "vm-grafana",
+          "theme": "kibibit",
+          "type": "panel",
+          "badges": [],
+          "cards": [
+            {
+              "type": "iframe",
+              "url": "https://wld1014.duckdns.org:8123/api/hassio_ingress/5hWuDQ61xH9sx2gWXtmu3_5WQ0fBGNBoNBmbSJDCYGE/d/c243afd3-2f8e-4894-8fc7-4986aba5e329/vmware-vsphere-ro?orgId=1&refresh=10s&kiosk&fullscreen",
+              "aspect_ratio": "50%",
+              "title": "VM Status"
             }
           ]
         }

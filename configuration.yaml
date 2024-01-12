@@ -125,4 +125,7 @@ influxdb:
 geo_location:
   - platform: usgs_earthquakes_feed
     feed_type: "past_month_all_earthquakes"
-    radius: 75
+    radius: 500
+    latitude: 40.57319
+    longitude: -74.26867
+    
