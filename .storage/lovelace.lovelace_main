@@ -2165,6 +2165,9 @@
                       "cameras": [
                         {
                           "camera_entity": "camera.frigate_front"
+                        },
+                        {
+                          "camera_entity": "camera.reolink_video_doorbell_fluent"
                         }
                       ],
                       "view": {
@@ -2208,7 +2211,11 @@
                       "type": "custom:frigate-card",
                       "cameras": [
                         {
-                          "camera_entity": "camera.frigate_doorbell"
+                          "camera_entity": "camera.reolink_video_doorbell_fluent"
+                        },
+                        {
+                          "camera_entity": "camera.frigate_doorbell",
+                          "live_provider": "auto"
                         }
                       ]
                     },

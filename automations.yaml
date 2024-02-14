@@ -279,3 +279,18 @@
         Action: android.intent.action.VIEW
         Data URI: S.UID=95270006IZGX19BB
   mode: single
+- id: '1706914699046'
+  alias: Reolink Doorbell Activated
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.reolink_video_doorbell_visitor
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.google_assistant_sdk
+    data:
+      message: Someone is at the door
+  mode: single
