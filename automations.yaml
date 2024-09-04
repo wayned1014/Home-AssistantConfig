@@ -116,7 +116,9 @@
     from:
     - OL
     - OL CHRG
-    to: OB DISCHRG
+    to:
+    - OB DISCHRG
+    - OL DISCHRG
   condition: []
   action:
   - service: notify.mobile_app_sm_g986u
@@ -124,46 +126,6 @@
       message: Power failure detected
       title: POWER OUTAGE
   mode: single
-- id: '1649984738410'
-  alias: GE Switch Double Taps
-  description: ''
-  use_blueprint:
-    path: kpine/ge_double.yaml
-    input:
-      device: f39d82088737706acb0961912b26b0e3
-      double_tap_on:
-      - device_id: 6ee3872cf9317fe13bf397782a44f7cd
-        domain: fan
-        entity_id: fan.in_wall_smart_fan_control
-        type: turn_off
-- id: '1657719272101'
-  alias: Update notifications
-  description: ''
-  use_blueprint:
-    path: mdegat01/update_notifications.yaml
-    input:
-      reminder_hours: '3'
-      mobile_app_device: e072311933925cbee3f9dbee5b460a38
-      only_after: 08:00:00
-      only_before: '23:00:00'
-      update_entities:
-      - update.*
-- id: '1657719949164'
-  alias: HA Update notifications
-  description: ''
-  use_blueprint:
-    path: mdegat01/update_notifications.yaml
-    input:
-      reminder_hours: '3'
-      update_entities:
-      - update.home_assistant_core_update
-      - update.home_assistant_operating_system_update
-      - update.home_assistant_supervisor_update
-      - update.hacs_update
-      mobile_app_device: e072311933925cbee3f9dbee5b460a38
-      only_after: 08:00:00
-      only_before: '23:00:00'
-      run_config_check: false
 - id: '1671396670067'
   alias: Uptime Robot Announcement
   description: ''
@@ -247,13 +209,10 @@
     entity_id: media_player.sony_bravia_tv
     state: 'on'
   action:
-  - service: notify.android_tv_fire_tv
+  - service: notify.pushbullet
     data:
-      message: Game starting in 10 minutes
-      title: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{ states.sensor.mets_tracker.attributes.opponent_name
-        }}'
-      data:
-        duration: 15
+      message: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{states.sensor.mets_tracker.attributes.opponent_name
+        }} game starts in 10 minutes'
   - service: notify.google_assistant_sdk
     data:
       message: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{     states.sensor.mets_tracker.attributes.opponent_name
@@ -293,4 +252,241 @@
   - service: notify.google_assistant_sdk
     data:
       message: Someone is at the door
+  - service: remote.turn_on
+    target:
+      entity_id: remote.living_room_tv
+    data:
+      activity: ipcam://
+  mode: single
+- id: '1709079489328'
+  alias: Fire Tablet Charge On
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.fire_tablet_battery_level
+    below: 8
+  condition: []
+  action:
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.fire_tablet_power_relay
+  mode: single
+- id: '1709079616905'
+  alias: Fire Tablet Charger Off
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.fire_tablet_battery_level
+    above: 95
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.fire_tablet_power_relay
+    data: {}
+  mode: single
+- id: '1713374933093'
+  alias: Water Leak Alert
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.washing_machine_leak_sensor_water
+    - binary_sensor.water_heater_leak_sensor_water
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition: []
+  action:
+  - service: notify.wayne_phone_sms
+    data:
+      message: 'ALERT: {{ trigger.to_state.name }} triggered'
+  mode: single
+- id: '1715651530621'
+  alias: Wawa Regular Gas Price
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.wawa_regular_gas
+    to:
+  condition: []
+  action:
+  - service: input_number.set_value
+    metadata: {}
+    data:
+      value: '{{states(''input_number.wawa_regular_gas_current_value'')|float}}'
+    target:
+      entity_id: input_number.wawa_regular_gas_prev_value
+  - service: input_number.set_value
+    metadata: {}
+    data:
+      value: '{{states(''sensor.wawa_regular_gas'')|float}}'
+    target:
+      entity_id: input_number.wawa_regular_gas_current_value
+  mode: single
+- id: '1715712048622'
+  alias: Frigate - Car Detection - Front
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: frigate/events
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''camera''] == ''frigate_front''
+        }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''label''] == ''car'' }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
+        }}'
+  action:
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      filename: snapshot_car_front.jpg
+      url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+  mode: single
+- id: '1715719165497'
+  alias: Frigate - Car Detection - Doorbell
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: frigate/events
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''camera''] == ''frigate_doorbell''
+        }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''label''] == ''car'' }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
+        }}'
+  action:
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      filename: snapshot_car_doorbell.jpg
+      url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+  mode: single
+- id: '1715719508935'
+  alias: Frigate - Person Detection - Front
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: frigate/events
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''camera''] == ''frigate_front''
+        }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''label''] == ''person''
+        }}'
+    - condition: template
+      value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
+        }}'
+  action:
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      filename: snapshot_person_front.jpg
+      url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+  mode: single
+- id: '1715740885115'
+  alias: QuickCheck Regular Gas Price
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.quickcheck_regular_gas
+    to:
+  condition: []
+  action:
+  - service: input_number.set_value
+    metadata: {}
+    data:
+      value: '{{states(''input_number.quickcheck_regular_gas_current_value'')|float}}'
+    target:
+      entity_id: input_number.quickcheck_regular_gas_prev_value
+  - service: input_number.set_value
+    metadata: {}
+    data:
+      value: '{{states(''sensor.quickcheck_regular_gas'')|float}}'
+    target:
+      entity_id: input_number.quickcheck_regular_gas_current_value
+  mode: single
+- id: '1720545368078'
+  alias: Doorbell check for unavailable
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - camera.frigate_doorbell
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  condition: []
+  action:
+  - service: notify.mobile_app_sm_g986u
+    metadata: {}
+    data:
+      message: Doorbell needs to be rebooted.
+      title: Alert
+  mode: single
+- id: '1722782659480'
+  alias: Set LR fan to 0% when off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - fan.lr_fan
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  condition: []
+  action:
+  - service: fan.set_percentage
+    target:
+      entity_id: fan.lr_fan
+    data:
+      percentage: 0
+  mode: single
+- id: '1723049264354'
+  alias: House Shutdown with Fan DoubleTap
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 247c05371f40491555b315759db17a2d
+    type: action
+    subtype: down_double
+  condition: []
+  action:
+  - service: input_button.press
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_button.house_shutdown_button
   mode: single

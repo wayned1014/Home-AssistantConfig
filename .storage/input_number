@@ -1,33 +1,73 @@
 {
-    "version": 1,
-    "minor_version": 1,
-    "key": "input_number",
-    "data": {
-        "items": [
-            {
-                "min": 0.0,
-                "max": 100.0,
-                "name": "Battery Warning Level",
-                "mode": "box",
-                "step": 1.0,
-                "id": "battery_warning_level"
-            },
-            {
-                "min": 0.0,
-                "max": 100.0,
-                "name": "Clock Brightness",
-                "mode": "slider",
-                "step": 1.0,
-                "id": "clock_brightness"
-            },
-            {
-                "min": 0.0,
-                "max": 100.0,
-                "name": "Livingroom GC Volume",
-                "step": 1.0,
-                "mode": "slider",
-                "id": "livingroom_gc_volume_slider"
-            }
-        ]
-    }
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_number",
+  "data": {
+    "items": [
+      {
+        "min": 0.0,
+        "max": 100.0,
+        "name": "Battery Warning Level",
+        "mode": "box",
+        "step": 1.0,
+        "id": "battery_warning_level"
+      },
+      {
+        "min": 0.0,
+        "max": 100.0,
+        "name": "Clock Brightness",
+        "mode": "slider",
+        "step": 1.0,
+        "id": "clock_brightness"
+      },
+      {
+        "min": 0.0,
+        "max": 100.0,
+        "name": "Livingroom GC Volume",
+        "step": 1.0,
+        "mode": "slider",
+        "id": "livingroom_gc_volume_slider"
+      },
+      {
+        "id": "wawa_regular_gas_current_value",
+        "min": 0.0,
+        "max": 100.0,
+        "name": "Wawa Regular Gas Current Value",
+        "icon": "mdi:gas-station",
+        "mode": "box",
+        "step": 1.0,
+        "unit_of_measurement": "USD/gallon"
+      },
+      {
+        "id": "wawa_regular_gas_prev_value",
+        "min": 0.0,
+        "max": 100.0,
+        "name": "Wawa Regular Gas Prev Value",
+        "icon": "mdi:gas-station",
+        "unit_of_measurement": "USD/gallon",
+        "step": 1.0,
+        "mode": "box"
+      },
+      {
+        "id": "quickcheck_regular_gas_current_value",
+        "min": 0.0,
+        "max": 100.0,
+        "name": "QuickCheck Regular Gas Current Value",
+        "icon": "mdi:gas-station",
+        "mode": "box",
+        "unit_of_measurement": "USD/gallon",
+        "step": 1.0
+      },
+      {
+        "id": "quickcheck_regular_gas_prev_value",
+        "min": 0.0,
+        "max": 100.0,
+        "name": "QuickCheck Regular Gas Prev Value",
+        "icon": "mdi:gas-station",
+        "mode": "box",
+        "unit_of_measurement": "USD/gallon",
+        "step": 1.0
+      }
+    ]
+  }
 }

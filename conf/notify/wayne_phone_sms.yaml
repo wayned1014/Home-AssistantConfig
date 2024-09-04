@@ -1,0 +1,10 @@
+- name: "wayne_phone_sms"
+  platform: smtp
+  server: "smtp.gmail.com"
+  port: 587
+  timeout: 15
+  sender: "wayne1014@gmail.com"
+  encryption: starttls
+  username: "wayne1014@gmail.com"
+  password: !secret gmail_pw
+  recipient: "7325586035@vtext.com"

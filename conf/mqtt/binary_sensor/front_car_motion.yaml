@@ -1,0 +1,10 @@
+- name: "Front Car Motion"
+  device_class: motion
+  off_delay: 2
+  state_topic: "frigate/events"
+  value_template: >
+    {% if (value_json['after']['camera'] == 'frigate_front') and (value_json['after']['label'] == 'car') and (value_json['after']['stationary'] == false) %}
+      ON
+    {% else %}
+      OFF
+    {% endif %}

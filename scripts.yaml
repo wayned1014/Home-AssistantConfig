@@ -64,21 +64,6 @@ google_home_good_morning:
       entity_id:
       - input_boolean.google_home_good_morning
   mode: single
-house_shutdown:
-  sequence:
-  - service: input_boolean.turn_on
-    target:
-      entity_id:
-      - input_boolean.house_shutdown
-    data: {}
-  - service: media_player.play_media
-    data:
-      media_content_id: https://www.thewavsite.com/AOL/goodbye.wav
-      media_content_type: music
-    target:
-      device_id: f242d546a9269c8d6ce48f77b3cd7ce6
-  mode: single
-  alias: House-Shutdown
 sonos_play_playlist:
   sequence:
   - service: input_text.set_value
@@ -251,3 +236,23 @@ keymaster_frontdoor_manual_notify:
       title: Test Title
   mode: parallel
   max: 10
+inovelli_fan_led_test:
+  alias: Inovelli Fan LED Test
+  use_blueprint:
+    path: zanix/inovelli_blue_led_zigbee2mqtt.yaml
+  icon: mdi:led-on
+frigate_car_identification:
+  alias: Frigate - Car Identification
+  sequence:
+  - service: google_generative_ai_conversation.generate_content
+    data:
+      prompt: A car has been detected, briefly describe the Car including its color,
+        Make and Model. The notification has to be brief enough to view it on an android
+        screen. If the image is black and white at night simply state that a car was
+        detecting.
+      image_filename: /media/camera_snapshot/snapshot.jpg
+    response_variable: generated_content
+  - service: notify.wayne_phone_sms
+    data:
+      message: '{{generated_content[''text''] }}'
+  mode: single

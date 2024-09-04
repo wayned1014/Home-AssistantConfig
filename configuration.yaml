@@ -49,9 +49,11 @@ rest_command: !include_dir_merge_named conf/rest_command/
 fan: !include_dir_merge_list conf/fan/
 # scrape: !include_dir_merge_list conf/scrape
 multiscrape: !include_dir_merge_list conf/multiscrape
+notify: !include_dir_merge_list conf/notify
 
 mqtt:
-  sensor: !include_dir_merge_list conf/mqtt/
+  sensor: !include_dir_merge_list conf/mqtt/sensor
+  binary_sensor: !include_dir_merge_list conf/mqtt/binary_sensor
 
 #shell_command:
 #  owntone_sonos_on: 'curl -X PUT "http://192.168.0.249:3689/api/outputs/79880900644729" --data "{\"selected\":true, \"volume\": 10}"'
