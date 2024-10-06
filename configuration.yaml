@@ -7,11 +7,11 @@ tts:
   - platform: google_translate
 #    base_url: https://192.168.0.238:8123
 
-opnsense:
-  url: https://opnsense.localdomain/api
-  api_secret: !secret opnsense_api_secret
-  api_key: !secret opnsense_api_key
-  verify_ssl: false
+# opnsense:
+#   url: https://opnsense.localdomain/api
+#   api_secret: !secret opnsense_api_secret
+#   api_key: !secret opnsense_api_key
+#   verify_ssl: false
   
 # https Setup
 http:

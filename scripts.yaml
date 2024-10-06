@@ -230,10 +230,10 @@ owntone01_power_off:
 keymaster_frontdoor_manual_notify:
   alias: Keymaster Frontdoor Manual Notify
   sequence:
-  - service: notify.mobile_app_sm_g986u
-    data:
-      message: Test Message
-      title: Test Title
+  - data:
+      message: '{{ message }}'
+      title: '{{ title }}'
+    action: notify.mobile_app_sm_g986u
   mode: parallel
   max: 10
 inovelli_fan_led_test:

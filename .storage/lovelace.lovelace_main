@@ -1904,8 +1904,9 @@
               "type": "conditional",
               "conditions": [
                 {
+                  "condition": "state",
                   "entity": "binary_sensor.doorbell_streaming_sensor",
-                  "state": "True"
+                  "state": "False"
                 }
               ],
               "card": {

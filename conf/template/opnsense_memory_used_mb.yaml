@@ -1,0 +1,4 @@
+- sensor:
+    - name: 'OPNSense Memory Used MB'
+      state: >
+        {{ '%.2f' | format(states('sensor.opnsense_memory_used') | float(0) / 1048576) }} MB of 8,192 MB
