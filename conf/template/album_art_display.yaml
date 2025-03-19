@@ -1,0 +1,3 @@
+- image:
+    - name: Album Art Display 
+      url: "{{ states('sensor.album_art') }}"

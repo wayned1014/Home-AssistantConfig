@@ -14,9 +14,9 @@ tts:
 #   verify_ssl: false
   
 # https Setup
-http:
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+#http:
+#  ssl_certificate: /ssl/fullchain.pem
+#  ssl_key: /ssl/privkey.pem
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -83,7 +83,7 @@ recorder:
   db_url: !secret recorder_db_url
 
   commit_interval: 1
-  purge_keep_days: 64
+  purge_keep_days: 120
   exclude:
     entities:
       - sensor.date

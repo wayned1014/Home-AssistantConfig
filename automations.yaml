@@ -509,3 +509,59 @@
       message: '{{ trigger.event.data.action_text }} {% if trigger.event.data.code_slot
         > 0 %}({{ trigger.event.data.code_slot_name }}){% endif %}'
   mode: single
+- id: '1738082072035'
+  alias: Camera Display Tablet
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 5d3a2fef7136d64dee0021716e4d6ec0
+    entity_id: 4d76f8ae9f2dc53e617b273aba54ea82
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.fire_tablet_screen
+  - action: browser_mod.popup
+    data:
+      dismissable: true
+      autoclose: false
+      browser_id:
+      - 553faa48e16dc42fb0c09ff5055c3f8d
+      title: Front Door
+      timeout: 15000
+      content:
+        camera_view: live
+        type: picture-glance
+        entities: []
+        camera_image: camera.frigate_doorbell
+        target:
+          device_id: 553faa48e16dc42fb0c09ff5055c3f8d
+      size: fullscreen
+  mode: single
+- id: '1740411637366'
+  alias: AI Event Summary (LLM Vision v1.4.0)
+  description: ''
+  use_blueprint:
+    path: valentinfrlch/event_summary.yaml
+    input:
+      input_mode: Frigate
+      notify_device:
+      - 11234b78f30692a4083e8b8ae31e0e45
+      camera_entities:
+      - camera.frigate_front
+      - camera.frigate_doorbell
+      cooldown: 4
+      provider: 01JMW9KMQXYDV94R6R4QYE26KW
+      model: llava-phi3
+      tap_navigate: /dashboard-timeline/0
+      remember: true
+      motion_sensors:
+      - binary_sensor.frigate_front_all_occupancy
+      - binary_sensor.frigate_doorbell_person_occupancy
+      max_frames: 4
+      preview_mode: Snapshot
+      temperature: 0.2
