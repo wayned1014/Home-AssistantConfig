@@ -7,12 +7,6 @@ tts:
   - platform: google_translate
 #    base_url: https://192.168.0.238:8123
 
-# opnsense:
-#   url: https://opnsense.localdomain/api
-#   api_secret: !secret opnsense_api_secret
-#   api_key: !secret opnsense_api_key
-#   verify_ssl: false
-  
 # https Setup
 #http:
 #  ssl_certificate: /ssl/fullchain.pem
@@ -26,7 +20,7 @@ scene: !include scenes.yaml
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
-    - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/lovelace-card-mod/card-mod.js?hacstag=12345678901
  
 # Example configuration.yaml entry
 nest:
@@ -40,6 +34,8 @@ nest:
 homeassistant:
   packages: !include_dir_named packages
   customize: !include customize.yaml
+#  media_dirs:
+#    llmvision: /config/media/llmvision
 
 sensor: !include_dir_merge_list conf/sensor/
 template: !include_dir_merge_list conf/template/

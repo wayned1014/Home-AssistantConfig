@@ -1,137 +1,137 @@
 - id: '1619552687242'
   alias: Clock Brightness
   description: ''
-  trigger:
-  - platform: state
-    entity_id: input_number.clock_brightness
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
+  triggers:
+  - entity_id: input_number.clock_brightness
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       topic: esp32/output/brightness
       payload: '{{ states.input_number.clock_brightness.state }}'
+    action: mqtt.publish
   mode: single
 - id: '1638132276419'
   alias: Flight entry notification
-  trigger:
-  - platform: event
-    event_type: opensky_entry
-  action:
-  - service: notify.mobile_app_sm_g986u
-    data:
+  triggers:
+  - event_type: opensky_entry
+    trigger: event
+  actions:
+  - data:
       message: Flight entry of {{ trigger.event.data.callsign }}, Altitude {{ trigger.event.data.altitude
         }} meters.
+    action: notify.mobile_app_sm_g986u
 - id: '1641250283772'
   alias: Volume Slider Change Bedroom
   description: ''
-  trigger:
-  - platform: state
-    entity_id: input_number.livingroom_gc_volume_slider
-  condition: []
-  action:
-  - service: rest_command.set_livingroom_gc_volume
+  triggers:
+  - entity_id: input_number.livingroom_gc_volume_slider
+    trigger: state
+  conditions: []
+  actions:
+  - action: rest_command.set_livingroom_gc_volume
+    data: {}
   mode: single
 - id: '1641250553089'
   alias: Volume Change Livingroom GC
   description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.livingroom_gc_volume
-  condition: []
-  action:
-  - service: input_number.set_value
-    data_template:
+  triggers:
+  - entity_id: sensor.livingroom_gc_volume
+    trigger: state
+  conditions: []
+  actions:
+  - data_template:
       entity_id: input_number.livingroom_gc_volume_slider
       value: '{{ states.sensor.bedroom_volume_slider.state }}'
+    action: input_number.set_value
   mode: single
 - id: '1644438643517'
   alias: OwnTone-Switch To Group
   description: ''
-  trigger:
-  - platform: state
-    entity_id: media_player.owntone_output_living_room_gh
-  - platform: state
-    entity_id: media_player.owntone_output_bedroom_speaker
-  condition:
+  triggers:
+  - entity_id: media_player.owntone_output_living_room_gh
+    trigger: state
+  - entity_id: media_player.owntone_output_bedroom_speaker
+    trigger: state
+  conditions:
   - condition: state
     entity_id: media_player.owntone_output_living_room_gh
     state: 'on'
   - condition: state
     entity_id: media_player.owntone_output_bedroom_speaker
     state: 'on'
-  action:
-  - service: media_player.turn_on
-    data: {}
+  actions:
+  - data: {}
     target:
       entity_id: media_player.owntone_output_home_group
+    action: media_player.turn_on
   mode: single
 - id: '1646450453527'
   alias: Eufy - Display image on TV
   description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.doorbell_ringing_sensor
+  triggers:
+  - entity_id: binary_sensor.doorbell_ringing_sensor
     to: 'True'
     from: 'False'
-  condition: []
-  action:
-  - service: camera.snapshot
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       filename: /config/www/images/doorbell.png
     target:
       device_id: 5bf9fd8da629f452bccc126bad2e538d
-  - service: notify.android_tv_fire_tv
-    data:
+    action: camera.snapshot
+  - data:
       title: Front Doorbell
       data:
         position: top-right
         image:
           path: /config/www/images/doorbell.png
       message: Doorbell
+    action: notify.android_tv_fire_tv
   mode: single
 - id: '1647999023211'
   alias: Watchtower
   description: ''
-  trigger:
-  - platform: webhook
-    webhook_id: 21582bf2-7327-45e7-9a0b-04a33d7c43d2-8dd5245e-42a8-4e15-9884-b3bade86ecce
+  triggers:
+  - webhook_id: 21582bf2-7327-45e7-9a0b-04a33d7c43d2-8dd5245e-42a8-4e15-9884-b3bade86ecce
     allowed_methods:
     - POST
     - PUT
     local_only: true
-  condition: []
-  action:
-  - service: input_text.set_value
-    data:
+    trigger: webhook
+  conditions: []
+  actions:
+  - data:
       value: '{{ trigger.data }}'
     target:
       entity_id: input_text.watchtower
+    action: input_text.set_value
   mode: single
 - id: '1649894408085'
   alias: UPS Power Outage
   description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.apc_nut_status_data
+  triggers:
+  - entity_id: sensor.apc_nut_status_data
     from:
     - OL
     - OL CHRG
     to:
     - OB DISCHRG
     - OL DISCHRG
-  condition: []
-  action:
-  - service: notify.mobile_app_sm_g986u
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       message: Power failure detected
       title: POWER OUTAGE
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1671396670067'
   alias: Uptime Robot Announcement
   description: ''
-  trigger:
-  - platform: event
-    event_type: call-service
+  triggers:
+  - event_type: call-service
     event_data:
       domain: notify
       service: mobile_app_sm_g986u
@@ -139,167 +139,167 @@
         title: Uptime Kuma
         data:
           status: 0
-  condition: []
-  action: []
+    trigger: event
+  conditions: []
+  actions: []
   mode: single
 - id: '1673390530487'
   alias: Eufy - Motion Detect
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.doorbell_motion_detected
     to: 'on'
-  condition: []
-  action:
-  - service: notify.mobile_app_sm_g986u
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       message: Motion Detected by HA
       title: Eufy
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1676045424188'
   alias: Notification - FedEx Package Notification
   description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.mail_fedex_delivered
+  triggers:
+  - entity_id: sensor.mail_fedex_delivered
     above: 0
-  condition: []
-  action:
+    trigger: numeric_state
+  conditions: []
+  actions:
   - condition: numeric_state
     entity_id: sensor.mail_fedex_delivered
     above: -0.6
-  - service: notify.mobile_app_sm_g986u
-    data:
+  - data:
       message: Looks like Fedex delivered your package. {{ states.sensor.mail_fedex_delivered.state
         }} / {{ states.sensor.mail_fedex_packages.state }} packages delivered.
       title: Fedex Delivery
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1682546505858'
   alias: restart 'rtlamr2mqtt' When Locked
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.gas_meter
     to:
     for:
       hours: 3
       minutes: 0
       seconds: 0
-  condition: []
-  action:
-  - service: hassio.addon_restart
-    data:
-      addon: 6713e36e_rtlamr2mqtt
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      addon: 697ef99b_rtlamr2mqtt
     enabled: true
-  - service: notify.mobile_app_sm_g986u
-    data:
+    action: hassio.addon_restart
+  - data:
       message: Restarting 'rtlamr2mqtt'
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1687703076206'
   alias: Mets game start
   description: ''
-  trigger:
-  - platform: template
-    value_template: '{{ as_timestamp(states.sensor.mets_tracker.attributes.date) -
+  triggers:
+  - value_template: '{{ as_timestamp(states.sensor.mets_tracker.attributes.date) -
       as_timestamp(now()) < 600 }}'
-  condition:
+    trigger: template
+  conditions:
   - condition: state
     entity_id: media_player.sony_bravia_tv
     state: 'on'
-  action:
-  - service: notify.pushbullet
-    data:
+  actions:
+  - data:
       message: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{states.sensor.mets_tracker.attributes.opponent_name
         }} game starts in 10 minutes'
-  - service: notify.google_assistant_sdk
-    data:
+    action: notify.pushbullet
+  - data:
       message: '{{ states.sensor.mets_tracker.attributes.team_name }} vs {{     states.sensor.mets_tracker.attributes.opponent_name
         }} starts in 10 minutes.'
+    action: notify.google_assistant_sdk
   mode: single
 - id: '1704686826560'
   alias: Reolink Doorbell Alert
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.reolink_video_doorbell_visitor
     from: 'off'
     to: 'on'
-  condition: []
-  action:
-  - service: notify.mobile_app_sm_g986u
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       message: command_launch_app
       data:
         package_name: com.mcu.reolink
         Activity Class: com.android.bc.login.WelcomeActivity
         Action: android.intent.action.VIEW
         Data URI: S.UID=95270006IZGX19BB
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1706914699046'
   alias: Reolink Doorbell Activated
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.reolink_video_doorbell_visitor
     from: 'off'
     to: 'on'
-  condition: []
-  action:
-  - service: notify.google_assistant_sdk
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       message: Someone is at the door
-  - service: remote.turn_on
-    target:
+    action: notify.google_assistant_sdk
+  - target:
       entity_id: remote.living_room_tv
     data:
       activity: ipcam://
+    action: remote.turn_on
   mode: single
 - id: '1709079489328'
   alias: Fire Tablet Charge On
   description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.fire_tablet_battery_level
     below: 8
-  condition: []
-  action:
-  - service: switch.turn_on
-    metadata: {}
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id: switch.fire_tablet_power_relay
+    action: switch.turn_on
   mode: single
 - id: '1709079616905'
   alias: Fire Tablet Charger Off
   description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.fire_tablet_battery_level
     above: 95
     for:
       hours: 0
       minutes: 0
       seconds: 0
-  condition: []
-  action:
-  - service: switch.turn_off
-    target:
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - target:
       entity_id:
       - switch.fire_tablet_power_relay
     data: {}
+    action: switch.turn_off
   mode: single
 - id: '1713374933093'
   alias: Water Leak Alert
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.washing_machine_leak_sensor_water
     - binary_sensor.water_heater_leak_sensor_water
     from: 'off'
@@ -308,42 +308,43 @@
       hours: 0
       minutes: 0
       seconds: 5
-  condition: []
-  action:
-  - service: notify.wayne_phone_sms
-    data:
+    trigger: state
+  conditions: []
+  actions:
+  - data:
       message: 'ALERT: {{ trigger.to_state.name }} triggered'
+    action: notify.wayne_phone_sms
   mode: single
 - id: '1715651530621'
   alias: Wawa Regular Gas Price
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.wawa_regular_gas
     to:
-  condition: []
-  action:
-  - service: input_number.set_value
-    metadata: {}
+    trigger: state
+  conditions: []
+  actions:
+  - metadata: {}
     data:
       value: '{{states(''input_number.wawa_regular_gas_current_value'')|float}}'
     target:
       entity_id: input_number.wawa_regular_gas_prev_value
-  - service: input_number.set_value
-    metadata: {}
+    action: input_number.set_value
+  - metadata: {}
     data:
       value: '{{states(''sensor.wawa_regular_gas'')|float}}'
     target:
       entity_id: input_number.wawa_regular_gas_current_value
+    action: input_number.set_value
   mode: single
 - id: '1715712048622'
   alias: Frigate - Car Detection - Front
   description: ''
-  trigger:
-  - platform: mqtt
-    topic: frigate/events
-  condition:
+  triggers:
+  - topic: frigate/events
+    trigger: mqtt
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -354,20 +355,20 @@
     - condition: template
       value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
         }}'
-  action:
-  - service: downloader.download_file
-    data:
+  actions:
+  - data:
       overwrite: true
       filename: snapshot_car_front.jpg
       url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+    action: downloader.download_file
   mode: single
 - id: '1715719165497'
   alias: Frigate - Car Detection - Doorbell
   description: ''
-  trigger:
-  - platform: mqtt
-    topic: frigate/events
-  condition:
+  triggers:
+  - topic: frigate/events
+    trigger: mqtt
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -378,20 +379,20 @@
     - condition: template
       value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
         }}'
-  action:
-  - service: downloader.download_file
-    data:
+  actions:
+  - data:
       overwrite: true
       filename: snapshot_car_doorbell.jpg
       url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+    action: downloader.download_file
   mode: single
 - id: '1715719508935'
   alias: Frigate - Person Detection - Front
   description: ''
-  trigger:
-  - platform: mqtt
-    topic: frigate/events
-  condition:
+  triggers:
+  - topic: frigate/events
+    trigger: mqtt
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -403,92 +404,92 @@
     - condition: template
       value_template: '{{ trigger.payload_json[''after''][''stationary''] == false
         }}'
-  action:
-  - service: downloader.download_file
-    data:
+  actions:
+  - data:
       overwrite: true
       filename: snapshot_person_front.jpg
       url: https://wld1014.duckdns.org:8123/api/frigate/notifications/{{trigger.payload_json['after']['id']}}/thumbnail.jpg
+    action: downloader.download_file
   mode: single
 - id: '1715740885115'
   alias: QuickCheck Regular Gas Price
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.quickcheck_regular_gas
     to:
-  condition: []
-  action:
-  - service: input_number.set_value
-    metadata: {}
+    trigger: state
+  conditions: []
+  actions:
+  - metadata: {}
     data:
       value: '{{states(''input_number.quickcheck_regular_gas_current_value'')|float}}'
     target:
       entity_id: input_number.quickcheck_regular_gas_prev_value
-  - service: input_number.set_value
-    metadata: {}
+    action: input_number.set_value
+  - metadata: {}
     data:
       value: '{{states(''sensor.quickcheck_regular_gas'')|float}}'
     target:
       entity_id: input_number.quickcheck_regular_gas_current_value
+    action: input_number.set_value
   mode: single
 - id: '1720545368078'
   alias: Doorbell check for unavailable
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - camera.frigate_doorbell
     to: unavailable
     for:
       hours: 0
       minutes: 2
       seconds: 0
-  condition: []
-  action:
-  - service: notify.mobile_app_sm_g986u
-    metadata: {}
+    trigger: state
+  conditions: []
+  actions:
+  - metadata: {}
     data:
       message: Doorbell needs to be rebooted.
       title: Alert
+    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1722782659480'
   alias: Set LR fan to 0% when off
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - fan.lr_fan
     to: 'off'
     for:
       hours: 0
       minutes: 0
       seconds: 1
-  condition: []
-  action:
-  - service: fan.set_percentage
-    target:
+    trigger: state
+  conditions: []
+  actions:
+  - target:
       entity_id: fan.lr_fan
     data:
       percentage: 0
+    action: fan.set_percentage
   mode: single
 - id: '1723049264354'
   alias: House Shutdown with Fan DoubleTap
   description: ''
-  trigger:
-  - platform: device
-    domain: mqtt
+  triggers:
+  - domain: mqtt
     device_id: 247c05371f40491555b315759db17a2d
     type: action
     subtype: down_double
-  condition: []
-  action:
-  - service: input_button.press
-    metadata: {}
+    trigger: device
+  conditions: []
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id: input_button.house_shutdown_button
+    action: input_button.press
   mode: single
 - id: '1728075436865'
   alias: keymaster_frontdoor Lock Notifications-Revised
@@ -543,14 +544,13 @@
       size: fullscreen
   mode: single
 - id: '1740411637366'
-  alias: AI Event Summary (LLM Vision v1.4.0)
+  alias: AI Event Summary (LLM Vision)
   description: ''
   use_blueprint:
     path: valentinfrlch/event_summary.yaml
     input:
       input_mode: Frigate
-      notify_device:
-      - 11234b78f30692a4083e8b8ae31e0e45
+      notify_device: []
       camera_entities:
       - camera.frigate_front
       - camera.frigate_doorbell
@@ -562,6 +562,57 @@
       motion_sensors:
       - binary_sensor.frigate_front_all_occupancy
       - binary_sensor.frigate_doorbell_person_occupancy
-      max_frames: 4
+      max_frames: 6
       preview_mode: Snapshot
       temperature: 0.2
+      message: 'Summarize the events based on a series of images captured at short
+        intervals. Focus only on moving subjects such as people, vehicles, and other
+        active elements. Ignore static objects and scenery. Provide a clear and concise
+        account of movements and interactions. Do not mention or imply the existence
+        of images—present the information as if directly observing the events. If
+        no movement is detected, respond with: ''No activity observed.'''
+      duration: 6
+- id: '1744026990698'
+  alias: AI Event Summary (v1.4.2)
+  description: ''
+  use_blueprint:
+    path: valentinfrlch/event_summary.yaml
+    input:
+      provider: 01JMW9KMQXYDV94R6R4QYE26KW
+- id: '1754524916425'
+  alias: Frigate Camera Monitor
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - camera.frigate_front
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s928u_s24
+    metadata: {}
+    data:
+      message: Camera Down
+      title: Frigate
+  mode: single
+- id: '1754582119986'
+  alias: Frigate-LPR
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.frigate_events
+    attribute: after.snapshot.recognized_license_plate
+    from: None
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s928u_s24
+    metadata: {}
+    data:
+      message: 'License Plate ID''d: {{ states.sensor.frigate_events.attributes.after.snapshot.recognized_license_plate
+        }}'
+  mode: single

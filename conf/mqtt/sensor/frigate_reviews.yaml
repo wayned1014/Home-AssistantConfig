@@ -1,0 +1,4 @@
+- name: frigate_reviews
+  state_topic: frigate/reviews
+  value_template: "{{ value_json.status }}"
+  json_attributes_topic: frigate/reviews

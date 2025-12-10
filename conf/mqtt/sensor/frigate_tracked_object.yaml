@@ -1,0 +1,4 @@
+- name: frigate_tracked_object
+  state_topic: frigate/tracked_object_update
+  value_template: "{{ value_json.status }}"
+  json_attributes_topic: frigate/tracked_object_update
