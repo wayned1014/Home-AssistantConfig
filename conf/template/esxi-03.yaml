@@ -1,0 +1,19 @@
+- sensor:
+    - name: 'ESXi-03 Host'
+      state: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_state"].state }}'
+      icon: mdi:server-network
+      attributes:
+        Available_Power_Policies: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_available_power_policies"].state }}'
+        Build: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_build"].state }}'
+        CPU_Total_Ghz: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_cputotal_ghz"].state }}'
+        CPU_Usage_Ghz: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_cpuusage_ghz"].state }}'
+        Maintenance_Mode: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_maintenance_mode"].state }}'
+        Mem_Total_Gb: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_memtotal_gb"].state }}'
+        Mem_Usage_Gb: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_memusage_gb"].state }}'
+        Name: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_name"].state }}'
+        Power_Policy: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_power_policy"].state }}'
+        Shutdown_Supported: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_shutdown_supported"].state }}'
+        Uptime_Hours: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_uptime_hours"].state }}'
+        Version: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_version"].state }}'
+        VMS: '{{ states["sensor.esxi_host_192_168_0_216_192_168_0_216_vms"].state }}'
+        License: '{{ states["sensor.esxi_host_192_168_0_216_esxi_license_192_168_0_216"].state }}'

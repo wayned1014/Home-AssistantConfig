@@ -122,10 +122,10 @@
     trigger: state
   conditions: []
   actions:
-  - data:
+  - action: notify.mobile_app_sm_s928u_s24
+    data:
       message: Power failure detected
       title: POWER OUTAGE
-    action: notify.mobile_app_sm_g986u
   mode: single
 - id: '1671396670067'
   alias: Uptime Robot Announcement
@@ -183,9 +183,10 @@
   - entity_id:
     - sensor.gas_meter
     to:
+    - unavailable
     for:
-      hours: 3
-      minutes: 0
+      hours: 0
+      minutes: 2
       seconds: 0
     trigger: state
   conditions: []
@@ -194,9 +195,10 @@
       addon: 697ef99b_rtlamr2mqtt
     enabled: true
     action: hassio.addon_restart
-  - data:
-      message: Restarting 'rtlamr2mqtt'
-    action: notify.mobile_app_sm_g986u
+  - action: notify.mobile_app_sm_s928u_s24
+    data:
+      message: rtlamr2mqtt is unavailable, restarting now.
+      title: Service Restart
   mode: single
 - id: '1687703076206'
   alias: Mets game start
@@ -265,7 +267,7 @@
   triggers:
   - entity_id:
     - sensor.fire_tablet_battery_level
-    below: 8
+    below: 10
     trigger: numeric_state
   conditions: []
   actions:
@@ -452,7 +454,7 @@
     data:
       message: Doorbell needs to be rebooted.
       title: Alert
-    action: notify.mobile_app_sm_g986u
+    action: notify.mobile_app_sm_s928u_s24
   mode: single
 - id: '1722782659480'
   alias: Set LR fan to 0% when off
@@ -479,7 +481,7 @@
   description: ''
   triggers:
   - domain: mqtt
-    device_id: 247c05371f40491555b315759db17a2d
+    device_id: 4522aac88a85a8827c6532b145174cf3
     type: action
     subtype: down_double
     trigger: device
@@ -553,32 +555,25 @@
       notify_device: []
       camera_entities:
       - camera.frigate_front
-      - camera.frigate_doorbell
-      cooldown: 4
-      provider: 01JMW9KMQXYDV94R6R4QYE26KW
-      model: llava-phi3
+      cooldown:
+        hours: 0
+        minutes: 0
+        seconds: 20
+      provider: 01M1PZ6HBX5DWRVV24JQKP6Z0D
+      model: ''
       tap_navigate: /dashboard-timeline/0
       remember: true
       motion_sensors:
-      - binary_sensor.frigate_front_all_occupancy
-      - binary_sensor.frigate_doorbell_person_occupancy
-      max_frames: 6
+      - binary_sensor.frigate_front_motion
+      max_frames: 40
       preview_mode: Snapshot
       temperature: 0.2
-      message: 'Summarize the events based on a series of images captured at short
-        intervals. Focus only on moving subjects such as people, vehicles, and other
-        active elements. Ignore static objects and scenery. Provide a clear and concise
-        account of movements and interactions. Do not mention or imply the existence
-        of images—present the information as if directly observing the events. If
-        no movement is detected, respond with: ''No activity observed.'''
-      duration: 6
-- id: '1744026990698'
-  alias: AI Event Summary (v1.4.2)
-  description: ''
-  use_blueprint:
-    path: valentinfrlch/event_summary.yaml
-    input:
-      provider: 01JMW9KMQXYDV94R6R4QYE26KW
+      message: Analyze these images from a camera. Focus on moving subjects such as
+        people, vehicles, and other active elements, including car's activity (e.g.,
+        parking, driving by) and identify its color, make, and model.
+      duration: 4
+      target_width: 3840
+      max_tokens: 2160
 - id: '1754524916425'
   alias: Frigate Camera Monitor
   description: ''
@@ -615,4 +610,65 @@
     data:
       message: 'License Plate ID''d: {{ states.sensor.frigate_events.attributes.after.snapshot.recognized_license_plate
         }}'
+  mode: single
+- id: '1784819123661'
+  alias: D-Link Camera Reset
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - camera.frigate_front_dlink
+    to:
+    - unavailable
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    target:
+      entity_id: switch.plug_01_relay
+    data: {}
+  - action: timer.start
+    metadata: {}
+    target:
+      entity_id: timer.dlink_power_timer
+    data:
+      duration:
+        hours: 0
+        minutes: 0
+        seconds: 20
+  - action: switch.turn_on
+    metadata: {}
+    target:
+      entity_id: switch.plug_01_relay
+    data: {}
+  - action: notify.mobile_app_sm_s928u_s24
+    metadata: {}
+    data:
+      message: D-Link camera is unavailable, restarting now.
+      title: D-Link Camera Down
+  mode: single
+- id: '1793115098035'
+  alias: dummy - reset to off
+  description: ''
+  triggers:
+  - trigger: switch.turned_on
+    target:
+      entity_id: input_boolean.dummy_fan_off
+    options:
+      behavior: each
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 2
+  conditions: []
+  actions:
+  - action: input_boolean.turn_off
+    metadata: {}
+    target:
+      entity_id: input_boolean.dummy_fan_off
+    data: {}
   mode: single

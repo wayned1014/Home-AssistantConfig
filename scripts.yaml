@@ -47,19 +47,19 @@ test_google_home_say:
 google_home_goodnight_2:
   alias: Google Home-Goodnight
   sequence:
-  - target:
+  - action: input_boolean.toggle
+    target:
       entity_id:
       - input_boolean.google_home_good_night
-    action: input_boolean.turn_on
     data: {}
   mode: single
 google_home_good_morning:
   alias: Google Home-Good Morning
   sequence:
-  - target:
+  - action: input_boolean.toggle
+    target:
       entity_id:
       - input_boolean.google_home_good_morning
-    action: input_boolean.turn_on
     data: {}
   mode: single
 sonos_play_playlist:
@@ -282,4 +282,31 @@ change_xfinity_channel:
     data:
       command: DPAD_CENTER
   alias: Change Xfinity Channel
+  description: ''
+climate_increase_temperature:
+  alias: Climate Increase Temperature
+  sequence:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.thermostat
+    data:
+      temperature: '{{ (state_attr(''climate.thermostat'', ''temperature'') | float)
+        + 1 }}'
+climate_decrease_temperature:
+  alias: Climate Decrease Temperature
+  sequence:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.thermostat
+    data:
+      temperature: '{{ (state_attr(''climate.thermostat'', ''temperature'') | float)
+        - 1 }}'
+appdaemon_house_shutdown:
+  sequence:
+  - action: input_button.press
+    metadata: {}
+    target:
+      entity_id: input_button.house_shutdown_button
+    data: {}
+  alias: Appdaemon House Shutdown
   description: ''

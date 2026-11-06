@@ -94,13 +94,13 @@ logger:
   default: info
 
 influxdb:
-  api_version: 2
-  ssl: false
-  host: 192.168.200.3
-  port: 8086
-  token: !secret influxdb_token
-  organization: ha
-  bucket: home_assistant
+#  api_version: 2
+#  ssl: false
+#  host: 192.168.200.3
+#  port: 8086
+#  token: !secret influxdb_token
+#  organization: ha
+#  bucket: home_assistant
   tags:
     source: HA
   tags_attributes:

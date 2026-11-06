@@ -28,6 +28,11 @@
       {
         "name": "owntone01-shuffle",
         "id": "owntone01_shuffle"
+      },
+      {
+        "id": "dummy_fan_off",
+        "name": "dummy_fan_off",
+        "icon": "mdi:fan"
       }
     ]
   }
